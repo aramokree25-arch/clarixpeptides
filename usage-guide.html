@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Usage Guide & Peptide Calculator | Clarix Peptides</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0F2240;
+  --navy-mid: #1A3560;
+  --teal: #2BB5A5;
+  --teal-dark: #229E8F;
+  --teal-light: #3DCFBF;
+  --white: #FFFFFF;
+  --off-white: #F7FAFC;
+  --gray-50: #F0F4FA;
+  --gray-100: #E1E8F5;
+  --muted: #6B7A99;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--navy);overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+
+/* -- DISCLAIMER BAR -- */
+#disc-bar{background:var(--navy);color:rgba(255,255,255,.8);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;padding:9px 48px 9px 20px;text-align:center;position:relative;line-height:1.4}
+#disc-bar button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:1.1rem;line-height:1;transition:color .2s}
+#disc-bar button:hover{color:#fff}
+
+/* -- NAV -- */
+#main-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--gray-100);transition:box-shadow .3s}
+#main-nav.scrolled{box-shadow:0 4px 24px rgba(15,34,64,.08)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px;height:82px}
+.nav-logo{flex-shrink:0}
+.nav-logo img{height:74px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--navy);text-decoration:none;padding:7px 13px;border-radius:7px;position:relative;transition:color .2s,background .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--teal);background:rgba(43,181,165,.07)}
+.nav-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.nib{width:40px;height:40px;border-radius:8px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy);position:relative;transition:color .2s,background .2s}
+.nib:hover{color:var(--teal);background:rgba(43,181,165,.07)}
+.nib svg{pointer-events:none}
+.cart-badge{position:absolute;top:4px;right:4px;min-width:17px;height:17px;background:var(--teal);color:#fff;font-size:.6rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;opacity:0;transform:scale(0);transition:opacity .2s,transform .2s}
+.cart-badge.show{opacity:1;transform:scale(1)}
+#hamburger{display:none}
+@media(max-width:900px){.nav-links{display:none}}
+@media(max-width:640px){#hamburger{display:flex}}
+
+/* -- SEARCH OVERLAY -- */
+#search-overlay{position:fixed;inset:0;z-index:200;background:rgba(15,34,64,.55);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
+#search-overlay.open{opacity:1;pointer-events:all}
+.search-panel{background:#fff;padding:28px 32px}
+.search-wrap{max-width:680px;margin:0 auto;position:relative}
+.search-wrap input{width:100%;padding:15px 52px;font-size:1.05rem;font-family:'DM Sans',sans-serif;border:2px solid var(--teal);border-radius:50px;outline:none;color:var(--navy)}
+.search-wrap .si{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--teal);pointer-events:none}
+.search-wrap .sc{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);padding:6px;border-radius:50%;transition:color .2s}
+.search-wrap .sc:hover{color:var(--navy)}
+#search-results{max-width:680px;margin:10px auto 0;background:#fff;border-radius:12px;border:1px solid var(--gray-100);box-shadow:0 8px 32px rgba(15,34,64,.12);overflow:hidden;max-height:380px;overflow-y:auto;display:none}
+#search-results.show{display:block}
+.sr-item{padding:13px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid var(--gray-50);transition:background .15s}
+.sr-item:hover{background:var(--gray-50)}
+.sr-item:last-child{border-bottom:none}
+.sr-name{font-weight:600;font-size:.9rem;color:var(--navy)}
+.sr-cat{font-size:.75rem;color:var(--muted);margin-top:2px}
+.sr-price{font-weight:700;font-size:.9rem;color:var(--teal);font-family:'Outfit',sans-serif}
+
+/* -- MOBILE MENU -- */
+#mobile-menu{position:fixed;inset:0;z-index:200;background:#fff;padding:76px 28px 28px;transform:translateX(-100%);transition:transform .3s ease}
+#mobile-menu.open{transform:translateX(0)}
+.mm-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:10px;border:1px solid var(--gray-100);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.mm-link{display:block;padding:15px 0;font-size:1.2rem;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gray-100);transition:color .15s}
+.mm-link:hover,.mm-link.active{color:var(--teal)}
+
+/* -- FOOTER -- */
+.footer{background:var(--navy);padding:60px 24px 28px;color:rgba(255,255,255,.6)}
+.fi2{max-width:1200px;margin:0 auto}
+.fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+@media(max-width:900px){.fg2{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:640px){.fg2{grid-template-columns:1fr}}
+.fb-brand img{height:34px;margin-bottom:14px}
+.fb-brand p{font-size:.79rem;line-height:1.7;color:rgba(255,255,255,.45);max-width:270px}
+.fc h4{font-size:.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.09em}
+.fc a{display:block;font-size:.79rem;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:9px;transition:color .15s}
+.fc a:hover{color:var(--teal)}
+.footer-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
+.f-legal{font-size:.68rem;color:rgba(255,255,255,.3);line-height:1.7;max-width:600px}
+.f-copy{font-size:.72rem;color:rgba(255,255,255,.3);white-space:nowrap}
+
+/* -- CART -- */
+#cart-backdrop{position:fixed;inset:0;z-index:149;background:rgba(15,34,64,.35);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .25s}
+#cart-backdrop.open{opacity:1;pointer-events:all}
+#cart-drawer{position:fixed;right:0;top:0;bottom:0;z-index:150;width:100%;max-width:400px;background:#fff;box-shadow:-8px 0 40px rgba(15,34,64,.14);transform:translateX(100%);transition:transform .35s cubic-bezier(.77,0,.18,1);display:flex;flex-direction:column}
+#cart-drawer.open{transform:translateX(0)}
+.cd-hdr{padding:22px 22px 18px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cd-hdr h2{font-size:1.2rem;font-weight:700;color:var(--navy)}
+.xbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--gray-100);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,background .2s}
+.xbtn:hover{background:var(--gray-50);color:var(--navy)}
+.cd-items{flex:1;overflow-y:auto;padding:12px 0}
+.cart-item{display:flex;gap:12px;padding:12px 22px;border-bottom:1px solid var(--gray-50)}
+.ci-img{width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--navy)}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-weight:600;font-size:.9rem;color:var(--navy)}
+.ci-str{font-size:.78rem;color:var(--muted);margin-top:1px}
+.ci-ctrl{display:flex;align-items:center;gap:6px;margin-top:8px}
+.qty-btn{width:26px;height:26px;border-radius:6px;border:1.5px solid var(--gray-100);background:#fff;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--navy);transition:background .15s}
+.qty-btn:hover{background:var(--gray-50)}
+.qty-n{font-size:.875rem;font-weight:600;min-width:20px;text-align:center}
+.ci-price{font-weight:700;font-size:.9rem;color:var(--navy);font-family:'Outfit',sans-serif}
+.ci-rm{background:none;border:none;cursor:pointer;color:var(--muted);padding:3px;border-radius:4px;transition:color .15s;align-self:flex-start}
+.ci-rm:hover{color:#e53e3e}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.ce-icon{font-size:3rem;opacity:.25;margin-bottom:14px}
+.cd-footer{padding:18px 22px;border-top:1px solid var(--gray-100)}
+.cd-sub,.cd-tot{display:flex;justify-content:space-between;margin-bottom:5px}
+.cd-sub{font-size:.875rem;color:var(--muted)}
+.cd-tot{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:16px;font-family:'Outfit',sans-serif}
+.checkout-btn{width:100%;padding:15px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
+.checkout-btn:hover{background:var(--teal)}
+
+/* -- ACCOUNT MODAL -- */
+#acct-modal{position:fixed;inset:0;z-index:250;background:rgba(15,34,64,.5);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;padding:16px}
+#acct-modal.open{opacity:1;pointer-events:all}
+.modal-box{background:#fff;border-radius:20px;padding:36px;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(15,34,64,.2);transform:scale(.95) translateY(10px);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+#acct-modal.open .modal-box{transform:scale(1) translateY(0)}
+.ml{display:flex;justify-content:center;margin-bottom:24px}
+.ml img{height:34px}
+.mtabs{display:flex;border-bottom:1px solid var(--gray-100);margin-bottom:24px}
+.mtab{flex:1;padding:11px;text-align:center;font-size:.875rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;font-family:'DM Sans',sans-serif;transition:color .2s,border-color .2s}
+.mtab.active{color:var(--teal);border-bottom-color:var(--teal)}
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:5px}
+.fi{width:100%;padding:12px 15px;border:1.5px solid var(--gray-100);border-radius:10px;font-size:.9375rem;font-family:'DM Sans',sans-serif;color:var(--navy);outline:none;transition:border-color .2s}
+.fi:focus{border-color:var(--teal)}
+.fb{width:100%;padding:13px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-size:.975rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;margin-top:6px;transition:background .2s}
+.fb:hover{background:var(--teal)}
+.merr{color:#e53e3e;font-size:.8rem;margin-top:7px;text-align:center}
+.loggedin{text-align:center}
+.loggedin h3{font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.loggedin p{font-size:.875rem;color:var(--muted);margin-bottom:22px}
+.signout-btn{padding:11px 28px;background:var(--gray-50);color:var(--navy);border:1px solid var(--gray-100);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:600;cursor:pointer;transition:background .2s}
+.signout-btn:hover{background:var(--gray-100)}
+
+/* -- TOAST -- */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:40px;font-size:.85rem;font-weight:500;z-index:500;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(15,34,64,.25);pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0)}
+.t-teal{color:var(--teal);font-weight:700}
+
+/* -- PAGE HERO -- */
+.pg-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:64px 24px 56px;position:relative;overflow:hidden}
+.pg-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(43,181,165,.13) 0%,transparent 60%);pointer-events:none}
+.pg-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 10% 80%,rgba(43,181,165,.07) 0%,transparent 55%);pointer-events:none}
+.pg-hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.pg-breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:22px}
+.pg-breadcrumb a{color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.pg-breadcrumb a:hover{color:var(--teal)}
+.pg-tag{display:inline-block;background:rgba(43,181,165,.15);border:1px solid rgba(43,181,165,.3);color:var(--teal);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px}
+.pg-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.08;margin-bottom:16px}
+.pg-hero p{font-size:.975rem;color:rgba(255,255,255,.5);line-height:1.8;max-width:580px}
+.pg-hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+@media(max-width:640px){.pg-hero-grid{grid-template-columns:1fr;gap:10px}}
+.pg-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.pg-stat-icon{width:36px;height:36px;border-radius:8px;background:rgba(43,181,165,.15);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0}
+.pg-stat-text strong{display:block;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:2px}
+.pg-stat-text span{font-size:.76rem;color:rgba(255,255,255,.35)}
+
+/* -- SECTION TABS -- */
+.section-tabs{position:sticky;top:82px;z-index:90;background:#fff;border-bottom:1px solid var(--gray-100);box-shadow:0 2px 16px rgba(15,34,64,.06)}
+.st-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.st-inner::-webkit-scrollbar{display:none}
+.st-tab{display:flex;align-items:center;gap:7px;padding:15px 20px;font-size:.82rem;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
+.st-tab:hover{color:var(--navy)}
+.st-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+.st-tab svg{flex-shrink:0;opacity:.7}
+
+/* -- GUIDE SECTION BASE -- */
+.guide-section{padding:76px 24px;scroll-margin-top:145px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.section-title{font-size:clamp(1.6rem,2.5vw,2.1rem);font-weight:800;letter-spacing:-.03em;color:var(--navy);margin-bottom:12px;line-height:1.15}
+.section-sub{font-size:.95rem;color:var(--muted);line-height:1.75;max-width:640px;margin-bottom:48px}
+
+/* -- RECEIVING -- */
+#receiving{background:#fff}
+.recv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:800px){.recv-grid{grid-template-columns:1fr}}
+.recv-card{background:var(--gray-50);border-radius:18px;padding:30px;border:1px solid var(--gray-100);position:relative;overflow:hidden;transition:box-shadow .25s,transform .2s}
+.recv-card:hover{box-shadow:0 12px 40px rgba(15,34,64,.09);transform:translateY(-2px)}
+.recv-num{position:absolute;top:18px;right:20px;font-family:'Outfit',sans-serif;font-size:3.5rem;font-weight:900;color:var(--gray-100);line-height:1;user-select:none}
+.recv-icon{width:48px;height:48px;border-radius:12px;background:rgba(43,181,165,.1);display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:18px}
+.recv-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:9px}
+.recv-card p{font-size:.875rem;color:var(--muted);line-height:1.72}
+
+/* -- RECONSTITUTION -- */
+#reconstitution{background:var(--gray-50)}
+.recon-steps{display:flex;flex-direction:column;gap:0}
+.recon-step{display:grid;grid-template-columns:60px 1fr;gap:28px;align-items:flex-start;padding:36px 0;border-bottom:1px solid rgba(15,34,64,.07)}
+.recon-step:last-child{border-bottom:none}
+@media(max-width:640px){.recon-step{grid-template-columns:1fr;gap:14px}}
+.rs-num{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px}
+.rs-content h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+.rs-content p{font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:12px}
+.rs-content p:last-child{margin-bottom:0}
+.rs-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;margin-bottom:4px}
+.rs-pill{padding:6px 14px;border-radius:20px;font-size:.79rem;font-weight:600;background:#fff;border:1.5px solid var(--gray-100);color:var(--navy)}
+.rs-pill.primary{background:rgba(43,181,165,.09);border-color:rgba(43,181,165,.28);color:var(--teal-dark)}
+.rs-tip{display:flex;gap:10px;background:rgba(43,181,165,.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:13px 16px;margin-top:14px;font-size:.84rem;color:var(--muted);line-height:1.65}
+.rs-tip svg{flex-shrink:0;color:var(--teal);margin-top:2px}
+
+/* -- STORAGE -- */
+#storage{background:#fff}
+.storage-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:768px){.storage-grid{grid-template-columns:1fr}}
+.storage-card{border-radius:18px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 4px 24px rgba(15,34,64,.06)}
+.sc-header{padding:22px 24px;display:flex;align-items:center;gap:14px}
+.sc-header.lyoph{background:linear-gradient(135deg,var(--navy) 0%,#162e55 100%)}
+.sc-header.recon{background:linear-gradient(135deg,#0d2535 0%,#1a3a50 100%)}
+.sc-icon{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);flex-shrink:0}
+.sc-title-wrap strong{display:block;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:2px}
+.sc-title-wrap span{font-size:.76rem;color:rgba(255,255,255,.45)}
+.sc-row{display:grid;grid-template-columns:96px 1fr;gap:0;border-bottom:1px solid var(--gray-50)}
+.sc-row:last-child{border-bottom:none}
+.sc-temp{padding:18px 16px;border-right:1px solid var(--gray-50);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--gray-50)}
+.temp-val{font-family:'JetBrains Mono','Courier New',monospace;font-size:1rem;font-weight:600;color:var(--navy);line-height:1;text-align:center}
+.temp-val.cold{color:#2563eb}
+.temp-val.colder{color:#7c3aed}
+.temp-val.warn{color:#dc2626;font-size:1.3rem}
+.temp-label{font-size:.68rem;color:var(--muted);margin-top:5px;text-align:center;line-height:1.3}
+.sc-detail{padding:18px 20px}
+.sc-detail strong{display:block;font-size:.875rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.sc-detail span{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* -- TIPS -- */
+#tips{background:var(--gray-50)}
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:640px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--gray-100);display:flex;gap:14px;align-items:flex-start;transition:box-shadow .2s}
+.tip-card:hover{box-shadow:0 6px 28px rgba(15,34,64,.08)}
+.tip-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(43,181,165,.1);color:var(--teal)}
+.tip-card h4{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:5px}
+.tip-card p{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+/* -- CALCULATOR V2 -- */
+#calculator{background:var(--navy);scroll-margin-top:145px}
+.calc-inner{max-width:1100px;margin:0 auto}
+.calc-header{margin-bottom:44px}
+.calc-header .section-label{color:var(--teal)}
+.calc-header .section-title{color:#fff}
+.calc-header .section-sub{color:rgba(255,255,255,.42);margin-bottom:0}
+
+.calc-v2-grid{display:grid;grid-template-columns:300px 1fr 268px;gap:14px;align-items:flex-start}
+@media(max-width:1060px){.calc-v2-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.calc-v2-grid{grid-template-columns:1fr}}
+
+.calc-v2-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden}
+.cv2-title{padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.07);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px}
+.cv2-step{width:24px;height:24px;border-radius:50%;background:rgba(43,181,165,.18);color:var(--teal);font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.cv2-body{padding:18px 22px}
+
+/* peptide pills */
+.peptide-pills{display:flex;flex-wrap:wrap;gap:5px}
+.peptide-pill{padding:4px 10px;border-radius:6px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.42);font-size:.73rem;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s,background .15s;font-family:'DM Sans',sans-serif}
+.peptide-pill:hover{border-color:rgba(43,181,165,.4);color:rgba(255,255,255,.85);background:rgba(43,181,165,.07)}
+.peptide-pill.sel{border-color:var(--teal);color:var(--teal);background:rgba(43,181,165,.12)}
+
+/* shared input components */
+.ci-group{margin-bottom:18px}
+.ci-label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.33);margin-bottom:8px}
+.ci-presets{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.ci-preset{padding:5px 11px;border-radius:7px;border:1.5px solid rgba(255,255,255,.11);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:.77rem;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s,background .15s;font-family:'DM Sans',sans-serif}
+.ci-preset:hover{border-color:rgba(43,181,165,.4);color:rgba(255,255,255,.85);background:rgba(43,181,165,.07)}
+.ci-preset:active{transform:scale(.97)}
+.ci-preset.sel{border-color:var(--teal);color:var(--teal);background:rgba(43,181,165,.12)}
+.ci-input-wrap{display:flex;border-radius:10px;overflow:hidden;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:border-color .2s}
+.ci-input-wrap:focus-within{border-color:rgba(43,181,165,.6)}
+.ci-input-wrap input{flex:1;padding:11px 13px;background:none;border:none;outline:none;font-size:.95rem;font-family:'JetBrains Mono','Courier New',monospace;color:#fff;font-weight:500;min-width:0}
+.ci-input-wrap input::placeholder{color:rgba(255,255,255,.18)}
+.ci-input-wrap input::-webkit-inner-spin-button,.ci-input-wrap input::-webkit-outer-spin-button{-webkit-appearance:none}
+.ci-unit{padding:11px 13px;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.28);background:rgba(255,255,255,.03);border-left:1px solid rgba(255,255,255,.07);display:flex;align-items:center;white-space:nowrap}
+
+/* range slider */
+.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.calc-slider{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;background:rgba(255,255,255,.1);outline:none;cursor:pointer}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--teal);cursor:pointer;box-shadow:0 0 0 3px rgba(43,181,165,.2);transition:box-shadow .15s}
+.calc-slider::-webkit-slider-thumb:hover{box-shadow:0 0 0 5px rgba(43,181,165,.28)}
+.calc-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--teal);cursor:pointer;border:none}
+
+/* 4 metrics grid */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.metric-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;transition:opacity .3s}
+.metric-card.metric-primary{background:rgba(43,181,165,.09);border-color:rgba(43,181,165,.22)}
+.metric-label{font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px}
+.metric-value{font-family:'JetBrains Mono','Courier New',monospace;font-size:1.45rem;font-weight:600;color:var(--teal);line-height:1;margin-bottom:3px}
+.metric-card:not(.metric-primary) .metric-value{color:#fff}
+.metric-unit{font-size:.65rem;color:rgba(255,255,255,.2)}
+
+/* doses per vial + syringe row */
+.dpv-row{display:flex;gap:10px;margin-bottom:11px}
+.dpv-card{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px}
+.dpv-label{font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px}
+.dpv-value{font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:600;color:#fff;line-height:1;margin-bottom:4px}
+.dpv-sub{font-size:.69rem;color:rgba(255,255,255,.22);line-height:1.45}
+.syringe-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:50px}
+.syringe-label{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.22);text-align:center}
+.syringe-outer{width:24px;height:96px;border:2px solid rgba(255,255,255,.14);border-radius:3px 3px 0 0;background:rgba(0,0,0,.2);position:relative;overflow:hidden;margin:0 auto}
+.syringe-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(43,181,165,.3) 0%,rgba(43,181,165,.65) 100%);transition:height .45s cubic-bezier(.34,1.2,.64,1)}
+.syringe-mark{position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.1);display:flex;justify-content:flex-end}
+.syringe-mark span{font-size:.46rem;color:rgba(255,255,255,.2);padding-right:2px;line-height:1;font-family:'JetBrains Mono',monospace}
+.syringe-tip{width:4px;height:9px;background:rgba(255,255,255,.14);border-radius:0 0 3px 3px;margin:0 auto}
+.syringe-pct-label{font-family:'JetBrains Mono',monospace;font-size:.59rem;color:var(--teal);text-align:center;font-weight:600;margin-top:1px}
+
+/* formula note */
+.calc-formula-note{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:11px 13px}
+.calc-formula-note p{font-size:.72rem;color:rgba(255,255,255,.27);line-height:1.8}
+.calc-formula-note strong{color:rgba(255,255,255,.4);display:block;margin-bottom:4px}
+
+/* dose table */
+.dose-table-wrap{overflow:hidden}
+.dose-tbl{width:100%;border-collapse:collapse}
+.dose-tbl th{font-size:.64rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.24);padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+.dose-tbl td{padding:9px 14px;font-size:.81rem;border-bottom:1px solid rgba(255,255,255,.04);position:relative}
+.dose-tbl td:first-child{color:rgba(255,255,255,.52);font-family:'DM Sans',sans-serif}
+.dose-tbl td:not(:first-child){font-family:'JetBrains Mono',monospace;color:rgba(43,181,165,.8)}
+.dose-tbl tr.hl td{background:rgba(43,181,165,.08)}
+.dose-tbl tr.hl td:first-child{color:#fff;font-weight:600}
+.dose-tbl tr:last-child td{border-bottom:none}
+.dose-empty{color:rgba(255,255,255,.22);font-family:'DM Sans',sans-serif;font-size:.82rem;padding:28px 14px;text-align:center}
+
+/* -- LEGAL SECTION -- */
+.legal-section{background:var(--gray-50);padding:44px 24px;border-top:1px solid var(--gray-100)}
+.legal-inner{max-width:900px;margin:0 auto;display:flex;gap:18px;align-items:flex-start}
+.legal-icon{width:44px;height:44px;border-radius:10px;background:rgba(15,34,64,.06);display:flex;align-items:center;justify-content:center;color:var(--navy);flex-shrink:0;margin-top:2px}
+.legal-text h4{font-size:.875rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.legal-text p{font-size:.8rem;color:var(--muted);line-height:1.78}
+
+/* -- ANIMATIONS -- */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fiu{opacity:0;animation:fadeInUp .6s ease forwards}
+.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- DISCLAIMER BAR -->
+<div id="disc-bar">
+  PRODUCTS SOLD ON CLARIXPEPTIDES.COM ARE FOR RESEARCH PURPOSES ONLY AND ARE NOT FOR HUMAN OR VETERINARY USE.
+  <button onclick="this.parentElement.style.display='none'" aria-label="Dismiss">�</button>
+</div>
+
+<!-- MAIN NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="brand_assets/clarix_logo_primary.png" alt="Clarix Peptides">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="wholesale.html">Wholesale</a>
+      <a href="usage-guide.html" class="active">Usage Guide</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nib" id="search-btn" aria-label="Search">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="nib" id="acct-btn" aria-label="Account">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="nib" id="cart-btn" aria-label="Basket">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="nib" id="hamburger" aria-label="Menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button class="mm-close" id="mm-close">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a class="mm-link" href="index.html">Home</a>
+  <a class="mm-link" href="shop.html">Shop</a>
+  <a class="mm-link" href="wholesale.html">Wholesale</a>
+  <a class="mm-link active" href="usage-guide.html">Usage Guide</a>
+  <a class="mm-link" href="about.html">About Us</a>
+  <a class="mm-link" href="contact.html">Contact Us</a>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay">
+  <div class="search-panel">
+    <div class="search-wrap">
+      <svg class="si" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search-input" placeholder="Search peptides, compounds�" autocomplete="off">
+      <button class="sc" id="search-close">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="search-results"></div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="pg-hero">
+  <div class="pg-hero-inner">
+    <div class="pg-breadcrumb">
+      <a href="index.html">Home</a>
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Usage Guide</span>
+    </div>
+    <div class="pg-tag fiu">Research Guide</div>
+    <h1 class="fiu d1">Peptide Preparation<br>&amp; Usage Guide</h1>
+    <p class="fiu d2">Step-by-step protocols for receiving, reconstituting, and storing research peptides. Includes our interactive peptide calculator for precise dosing calculations.</p>
+    <div class="pg-hero-grid fiu d3">
+      <div class="pg-stat">
+        <div class="pg-stat-icon">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 6v12m-4-6h8"/></svg>
+        </div>
+        <div class="pg-stat-text"><strong>Lyophilised Handling</strong><span>Vial inspection &amp; storage</span></div>
+      </div>
+      <div class="pg-stat">
+        <div class="pg-stat-icon">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/></svg>
+        </div>
+        <div class="pg-stat-text"><strong>Reconstitution Protocol</strong><span>Solvent selection &amp; mixing</span></div>
+      </div>
+      <div class="pg-stat">
+        <div class="pg-stat-icon">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="11" y2="14"/></svg>
+        </div>
+        <div class="pg-stat-text"><strong>Peptide Calculator</strong><span>Concentration &amp; dosing tool</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION TABS (sticky) -->
+<div class="section-tabs">
+  <div class="st-inner">
+    <button class="st-tab active" onclick="scrollToSection('receiving')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Receiving &amp; Handling
+    </button>
+    <button class="st-tab" onclick="scrollToSection('reconstitution')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/></svg>
+      Reconstitution
+    </button>
+    <button class="st-tab" onclick="scrollToSection('storage')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+      Storage
+    </button>
+    <button class="st-tab" onclick="scrollToSection('tips')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+      General Tips
+    </button>
+    <button class="st-tab" onclick="scrollToSection('calculator')">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="11" y2="14"/></svg>
+      Peptide Calculator
+    </button>
+  </div>
+</div>
+
+<!-- ------------------------------------------ -->
+<!-- SECTION 1: RECEIVING & HANDLING          -->
+<!-- ------------------------------------------ -->
+<section class="guide-section" id="receiving">
+  <div class="section-inner">
+    <div class="section-label">Step 1</div>
+    <h2 class="section-title">Receiving &amp; Handling</h2>
+    <p class="section-sub">Upon receipt of your lyophilised peptide compounds, follow these three protocols before commencing any research activity to ensure compound integrity is maintained.</p>
+    <div class="recv-grid">
+
+      <div class="recv-card">
+        <span class="recv-num">01</span>
+        <div class="recv-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Visual Inspection</h3>
+        <p>Upon receipt, inspect the vial carefully. Lyophilised peptides may appear as a fine white powder, a translucent film, or may be effectively invisible inside the vial. The absence of visible material does not indicate a defective or empty product � this is entirely normal behaviour for high-purity lyophilised compounds.</p>
+      </div>
+
+      <div class="recv-card">
+        <span class="recv-num">02</span>
+        <div class="recv-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+        </div>
+        <h3>Temperature Equilibration</h3>
+        <p>Allow cold-shipped vials to reach ambient room temperature fully before opening. Opening a cold vial in a warm environment causes condensation to form on and inside the vial, which can cause peptide degradation and moisture-induced aggregation. Allow at least 30 minutes at room temperature before proceeding.</p>
+      </div>
+
+      <div class="recv-card">
+        <span class="recv-num">03</span>
+        <div class="recv-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Minimise Exposure</h3>
+        <p>Open vials only in a clean, dry environment. Reseal immediately after each handling session to limit exposure to atmospheric humidity and oxygen � both accelerate peptide chain degradation. When possible, work under a laminar flow hood or biological safety cabinet using sterile technique throughout.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------ -->
+<!-- SECTION 2: RECONSTITUTION                -->
+<!-- ------------------------------------------ -->
+<section class="guide-section" id="reconstitution">
+  <div class="section-inner">
+    <div class="section-label">Step 2</div>
+    <h2 class="section-title">Reconstituting Your Peptide</h2>
+    <p class="section-sub">Reconstitution converts a lyophilised (freeze-dried) peptide back into a liquid solution for research use. Follow these three steps in order to preserve compound purity and bioactivity.</p>
+
+    <div class="recon-steps">
+
+      <div class="recon-step">
+        <div class="rs-num">1</div>
+        <div class="rs-content">
+          <h3>Solvent Selection</h3>
+          <p>Choosing the correct solvent is the most critical step in reconstitution. Always start with the mildest effective solvent and progress to stronger options only if dissolution is incomplete. <strong>Bacteriostatic Water (BW)</strong> is the standard choice for most research peptides � its 0.9% benzyl alcohol content inhibits microbial growth and substantially extends the usable shelf life of your reconstituted solution.</p>
+          <div class="rs-pills">
+            <span class="rs-pill primary">Bacteriostatic Water � recommended first choice</span>
+            <span class="rs-pill primary">Sterile distilled water � suitable for short-term use</span>
+            <span class="rs-pill">0.1% Acetic acid � for difficult-to-dissolve peptides</span>
+            <span class="rs-pill">Ammonium bicarbonate � if acetic acid is insufficient</span>
+            <span class="rs-pill">DMSO / Ethanol � hydrophobic peptides only</span>
+          </div>
+          <div class="rs-tip">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            <span>Bacteriostatic water extends reconstituted peptide shelf life to 4�8 weeks at 4�C, compared to just 7�10 days with plain sterile water. For any peptide you plan to use over multiple sessions, bacteriostatic water is strongly preferred.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recon-step">
+        <div class="rs-num">2</div>
+        <div class="rs-content">
+          <h3>Gentle Mixing Technique</h3>
+          <p>Using a sterile insulin syringe, introduce the reconstitution solvent slowly by directing it along the inside glass wall of the vial � never inject it directly onto the lyophilised peptide. Slow side-wall addition prevents foaming and avoids mechanically disrupting the peptide structure.</p>
+          <p>Once the solvent is added, gently swirl the vial using a slow rolling motion between the palms. <strong>Do not vortex or shake vigorously.</strong> Mechanical agitation can denature sensitive peptide structures, produce irreversible aggregates, and significantly reduce bioactivity.</p>
+          <div class="rs-tip">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            <span>A 1 mL sterile insulin syringe is ideal for adding reconstitution solvent � it provides precise volume control and allows you to add the solvent slowly along the vial wall. Use a fresh, sterile syringe for each reconstitution.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recon-step">
+        <div class="rs-num">3</div>
+        <div class="rs-content">
+          <h3>Dissolution &amp; Clarity</h3>
+          <p>After adding the solvent and gently swirling, allow the vial to stand at room temperature for 15�30 minutes, swirling gently every few minutes. The majority of peptides will dissolve fully within this window to produce a clear, colourless or very slightly tinted solution.</p>
+          <p>If particles remain after 30 minutes, apply brief, gentle sonication in a laboratory water bath sonicator (30�60 seconds). If the peptide still does not dissolve fully, this may indicate a solvent incompatibility � return to Step 1 and trial an alternative solvent system such as 0.1% acetic acid.</p>
+          <div class="rs-tip">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            <span>Slight cloudiness immediately after solvent addition is normal and typically resolves within a few minutes of gentle swirling. A solution that remains turbid after 30 minutes of swirling warrants investigation of the solvent choice.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------ -->
+<!-- SECTION 3: STORAGE                       -->
+<!-- ------------------------------------------ -->
+<section class="guide-section" id="storage">
+  <div class="section-inner">
+    <div class="section-label">Step 3</div>
+    <h2 class="section-title">Storage Conditions</h2>
+    <p class="section-sub">Correct storage is essential for preserving peptide potency and purity. Use these guidelines to maximise the working lifespan of your research compounds.</p>
+    <div class="storage-grid">
+
+      <div class="storage-card">
+        <div class="sc-header lyoph">
+          <div class="sc-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 6v12m-4-6h8"/></svg>
+          </div>
+          <div class="sc-title-wrap">
+            <strong>Lyophilised Peptides</strong>
+            <span>Unreconstituted powder / film</span>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="sc-row">
+            <div class="sc-temp">
+              <div class="temp-val cold">+4�C</div>
+              <div class="temp-label">Refrigerator<br>Short-term</div>
+            </div>
+            <div class="sc-detail">
+              <strong>Up to 3 months</strong>
+              <span>Store in a sealed, desiccated container with silica gel packets to control humidity. Protect from light. Suitable for peptides in active use where regular access is needed.</span>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-temp">
+              <div class="temp-val colder">-20�C</div>
+              <div class="temp-label">Freezer<br>Long-term</div>
+            </div>
+            <div class="sc-detail">
+              <strong>6�12 months</strong>
+              <span>Standard household or laboratory freezer. Store in airtight containers. Always allow full equilibration to room temperature before opening the vial to prevent condensation ingress.</span>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-temp">
+              <div class="temp-val colder">-80�C</div>
+              <div class="temp-label">Ultra-low<br>Extended</div>
+            </div>
+            <div class="sc-detail">
+              <strong>12�24+ months</strong>
+              <span>Ultra-low temperature storage for maximum longevity and stability. Recommended for high-value compounds or research programmes spanning multiple years. Use cryogenic containers.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="storage-card">
+        <div class="sc-header recon">
+          <div class="sc-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>
+          </div>
+          <div class="sc-title-wrap">
+            <strong>Reconstituted Peptides</strong>
+            <span>After adding BAC water or solvent</span>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="sc-row">
+            <div class="sc-temp">
+              <div class="temp-val cold">+4�C</div>
+              <div class="temp-label">Refrigerator<br>In use</div>
+            </div>
+            <div class="sc-detail">
+              <strong>4�8 weeks (BAC water) � 7�10 days (sterile water)</strong>
+              <span>Refrigerate in sealed vials. Bacteriostatic water extends shelf life significantly. Plain sterile water solutions must be used within 7�10 days. Never leave reconstituted peptides at room temperature.</span>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-temp">
+              <div class="temp-val colder">-20�C</div>
+              <div class="temp-label">Frozen<br>Aliquots</div>
+            </div>
+            <div class="sc-detail">
+              <strong>Up to 3�6 months (single-use aliquots)</strong>
+              <span>Pre-divide into single-use aliquot volumes before freezing. Label every aliquot: peptide name, concentration (mcg/mL), preparation date, and solvent used. Thaw fully before use and do not refreeze.</span>
+            </div>
+          </div>
+          <div class="sc-row">
+            <div class="sc-temp" style="background:#fff5f5">
+              <div class="temp-val warn">?</div>
+              <div class="temp-label" style="color:#dc2626">Avoid</div>
+            </div>
+            <div class="sc-detail">
+              <strong>No repeated freeze-thaw cycles</strong>
+              <span>Each freeze-thaw cycle causes peptide aggregation, oxidation, and permanent potency loss. Pre-aliquot before freezing so each vial is used only once. Once thawed, keep at 4�C and use within the refrigerated window.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------ -->
+<!-- SECTION 4: GENERAL TIPS                  -->
+<!-- ------------------------------------------ -->
+<section class="guide-section" id="tips">
+  <div class="section-inner">
+    <div class="section-label">Best Practice</div>
+    <h2 class="section-title">General Research Tips</h2>
+    <p class="section-sub">Additional guidance to protect the integrity of your peptide compounds across every stage of the research lifecycle.</p>
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+        </div>
+        <div>
+          <h4>Protect from Light</h4>
+          <p>Many peptides are photosensitive. Store in amber vials or wrap clear vials in aluminium foil. Minimise direct light exposure during handling and reconstitution � UV and even fluorescent light can cleave peptide bonds and accelerate oxidative degradation.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div>
+          <h4>Label Everything Precisely</h4>
+          <p>Label all vials and aliquots with: compound name, concentration (mcg/mL), preparation date, reconstitution solvent, and storage conditions. Ambiguous or missing labels are a leading cause of research protocol errors and wasted compounds.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </div>
+        <div>
+          <h4>Avoid Freeze-Thaw Cycling</h4>
+          <p>Repeated freezing and thawing is one of the primary causes of peptide degradation. Pre-aliquot all reconstituted peptides into single-use volumes before placing in the freezer. Once thawed, keep at 4�C and use within the specified refrigerated window.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h4>Use Sterile Technique Throughout</h4>
+          <p>Always use sterile, single-use syringes and needles. Wipe vial septa with 70% isopropyl alcohol before each needle insertion. Work in a clean environment and wear nitrile gloves to prevent sample contamination and cross-contamination between compounds.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <h4>Verify Purity with Your COA</h4>
+          <p>All Clarix Peptides products ship with a Certificate of Analysis (COA) confirming =98% purity by HPLC and MS verification. Retain your COA records � they are required for compliant laboratory documentation and audit trails.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="11" y2="14"/></svg>
+        </div>
+        <div>
+          <h4>Use the Peptide Calculator</h4>
+          <p>Use our calculator below to accurately determine reconstitution concentrations and dosing volumes for your research protocols. Generate a complete quick-reference dosing table for your specific vial configuration in seconds.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------ -->
+<!-- SECTION 5: PEPTIDE CALCULATOR V2         -->
+<!-- ------------------------------------------ -->
+<section class="guide-section" id="calculator" style="background:var(--navy)">
+  <div class="calc-inner">
+    <div class="calc-header">
+      <div class="section-label">Research Tool</div>
+      <h2 class="section-title">Peptide Dosing Calculator</h2>
+      <p class="section-sub">Select your peptide, configure vial strength and reconstitution volume, then enter a target dose to generate a full dosing reference instantly.</p>
+    </div>
+
+    <div class="calc-v2-grid">
+
+      <!-- PANEL 1: INPUTS -->
+      <div class="calc-v2-panel">
+        <div class="cv2-title"><span class="cv2-step">01</span>Configure Vial</div>
+        <div class="cv2-body">
+
+          <div class="ci-group">
+            <label class="ci-label">Quick-select peptide</label>
+            <div id="peptide-pills" class="peptide-pills"></div>
+          </div>
+
+          <div class="ci-group">
+            <label class="ci-label">Vial Peptide Amount</label>
+            <div class="slider-row">
+              <input type="range" id="sl-mg" min="1" max="50" step="0.5" value="10" class="calc-slider" oninput="syncSlider('mg',this.value)">
+              <div class="ci-input-wrap" style="width:108px;flex-shrink:0">
+                <input type="number" id="inp-mg" value="10" min="0.01" step="0.1" oninput="syncInput('mg',this.value)">
+                <span class="ci-unit">mg</span>
+              </div>
+            </div>
+            <div class="ci-presets" id="mg-presets">
+              <button class="ci-preset" onclick="setPreset('mg',2,this)">2mg</button>
+              <button class="ci-preset" onclick="setPreset('mg',5,this)">5mg</button>
+              <button class="ci-preset sel" onclick="setPreset('mg',10,this)">10mg</button>
+              <button class="ci-preset" onclick="setPreset('mg',20,this)">20mg</button>
+            </div>
+          </div>
+
+          <div class="ci-group">
+            <label class="ci-label">Bacteriostatic Water</label>
+            <div class="slider-row">
+              <input type="range" id="sl-ml" min="0.5" max="5" step="0.1" value="1" class="calc-slider" oninput="syncSlider('ml',this.value)">
+              <div class="ci-input-wrap" style="width:108px;flex-shrink:0">
+                <input type="number" id="inp-ml" value="1" min="0.1" step="0.1" oninput="syncInput('ml',this.value)">
+                <span class="ci-unit">mL</span>
+              </div>
+            </div>
+            <div class="ci-presets" id="ml-presets">
+              <button class="ci-preset sel" onclick="setPreset('ml',1,this)">1mL</button>
+              <button class="ci-preset" onclick="setPreset('ml',2,this)">2mL</button>
+              <button class="ci-preset" onclick="setPreset('ml',3,this)">3mL</button>
+              <button class="ci-preset" onclick="setPreset('ml',5,this)">5mL</button>
+            </div>
+          </div>
+
+          <div class="ci-group" style="margin-bottom:0">
+            <label class="ci-label">Target Dose</label>
+            <div class="ci-presets" id="dose-presets">
+              <button class="ci-preset" onclick="setDosePreset(100,this)">100mcg</button>
+              <button class="ci-preset" onclick="setDosePreset(250,this)">250mcg</button>
+              <button class="ci-preset" onclick="setDosePreset(500,this)">500mcg</button>
+              <button class="ci-preset" onclick="setDosePreset(1000,this)">1mg</button>
+            </div>
+            <div class="ci-input-wrap">
+              <input type="number" id="inp-dose" min="1" step="1" oninput="calcDosing()" placeholder="Enter dose">
+              <span class="ci-unit">mcg</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANEL 2: LIVE RESULTS -->
+      <div class="calc-v2-panel">
+        <div class="cv2-title"><span class="cv2-step">02</span>Live Results</div>
+        <div class="cv2-body">
+
+          <div class="metrics-grid">
+            <div class="metric-card metric-primary">
+              <div class="metric-label">Concentration</div>
+              <div class="metric-value" id="out-conc">&#8212;</div>
+              <div class="metric-unit">mcg / mL</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Per Syringe Unit</div>
+              <div class="metric-value" id="out-per-iu">&#8212;</div>
+              <div class="metric-unit">mcg / IU</div>
+            </div>
+            <div class="metric-card" id="dose-vol-card" style="opacity:.25">
+              <div class="metric-label">Draw Volume</div>
+              <div class="metric-value" id="out-vol">&#8212;</div>
+              <div class="metric-unit">mL</div>
+            </div>
+            <div class="metric-card" id="dose-iu-card" style="opacity:.25">
+              <div class="metric-label">Syringe Units</div>
+              <div class="metric-value" id="out-iu">&#8212;</div>
+              <div class="metric-unit">IU (100u syringe)</div>
+            </div>
+          </div>
+
+          <div class="dpv-row">
+            <div class="dpv-card">
+              <div class="dpv-label">Doses Per Vial</div>
+              <div class="dpv-value" id="out-dpv">&#8212;</div>
+              <div class="dpv-sub" id="out-dpv-sub">Enter a dose above</div>
+            </div>
+            <div class="syringe-wrap">
+              <div class="syringe-label">Fill</div>
+              <div class="syringe-outer">
+                <div class="syringe-fill" id="syringe-fill" style="height:0%"></div>
+                <div class="syringe-mark" style="bottom:75%"><span>75</span></div>
+                <div class="syringe-mark" style="bottom:50%"><span>50</span></div>
+                <div class="syringe-mark" style="bottom:25%"><span>25</span></div>
+              </div>
+              <div class="syringe-tip"></div>
+              <div class="syringe-pct-label" id="syringe-pct">&#8212; IU</div>
+            </div>
+          </div>
+
+          <div class="calc-formula-note">
+            <p><strong>Formula</strong>Conc (mcg/mL) = Peptide (mg) &times; 1,000 &divide; Solvent (mL)<br>Volume (mL) = Dose &divide; Conc &nbsp;&middot;&nbsp; IU = Volume &times; 100</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANEL 3: REFERENCE TABLE -->
+      <div class="calc-v2-panel">
+        <div class="cv2-title"><span class="cv2-step">03</span>Reference Table</div>
+        <div class="dose-table-wrap">
+          <table class="dose-tbl">
+            <thead>
+              <tr>
+                <th>Dose</th>
+                <th>Vol (mL)</th>
+                <th>IU</th>
+              </tr>
+            </thead>
+            <tbody id="dose-table-body">
+              <tr><td class="dose-empty" colspan="3">Configure vial to generate table.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Calculator disclaimer -->
+    <div style="margin-top:18px;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;display:flex;gap:12px;align-items:flex-start">
+      <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+      <p style="font-size:.73rem;color:rgba(255,255,255,.26);line-height:1.7">This calculator is provided for research planning purposes only. All Clarix Peptides products are strictly for in vitro laboratory research by qualified, licensed researchers. Not for human or veterinary use. Always verify calculations independently before use in formal research protocols.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- RESEARCH DISCLAIMER -->
+<div class="legal-section">
+  <div class="legal-inner">
+    <div class="legal-icon">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="legal-text">
+      <h4>Research Use Only � Important Notice</h4>
+      <p>All products supplied by Clarix Peptides are intended exclusively for <strong>in vitro laboratory research</strong> by qualified, licensed researchers. They are not approved by the MHRA, FDA, or any other regulatory body for human or veterinary use. This usage guide is provided solely for reference in laboratory research contexts. Clarix Peptides accepts no liability for any misuse of products or information contained herein. By purchasing our products, you confirm that you are aged 18 or over and a licensed researcher operating within the applicable laws of your jurisdiction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="fi2">
+    <div class="fg2">
+      <div class="fb-brand">
+        <img src="brand_assets/clarix_logo_reverse.png" alt="Clarix Peptides">
+        <p>Premium research peptides supplied to licensed researchers across the UK. All products for research purposes only. Not for human or veterinary use.</p>
+      </div>
+      <div class="fc">
+        <h4>Shop</h4>
+        <a href="#">GLP-1 Agonists</a>
+        <a href="#">Growth Hormone</a>
+        <a href="#">Repair Peptides</a>
+        <a href="#">Longevity</a>
+        <a href="shop.html">All Products</a>
+      </div>
+      <div class="fc">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="wholesale.html">Wholesale</a>
+          <a href="usage-guide.html">Usage Guide</a>
+        </div>
+      <div class="fc">
+        <h4>Support</h4>
+        <a href="contact.html">Contact Us</a>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Returns</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p class="f-legal">All products sold by Clarix Peptides are intended for research purposes only and are not approved by the MHRA, FDA, or any other regulatory body for human or veterinary use. Products must only be handled by qualified, licensed researchers. By purchasing, you confirm you are 18+ and a licensed researcher. Clarix Peptides accepts no liability for misuse.</p>
+      <p class="f-copy">� 2025 Clarix Peptides Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- CART BACKDROP + DRAWER -->
+<div id="cart-backdrop" onclick="closeCart()"></div>
+<div id="cart-drawer">
+  <div class="cd-hdr">
+    <h2>Your Basket</h2>
+    <button class="xbtn" onclick="closeCart()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cd-items" id="cart-items-el"></div>
+  <div class="cd-footer" id="cart-footer-el"></div>
+</div>
+
+<!-- ACCOUNT MODAL -->
+<div id="acct-modal">
+  <div class="modal-box">
+    <button onclick="closeAcct()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;border-radius:6px;transition:color .2s" onmouseover="this.style.color='var(--navy)'" onmouseout="this.style.color='var(--muted)'">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="ml"><img src="brand_assets/clarix_logo_primary.png" alt="Clarix Peptides"></div>
+    <div id="acct-modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// -- PRODUCT DATA (for search) --------------------------------------------------
+const PRODUCTS = [
+  {id:1,  name:"Retatrutide",       strength:"10mg",  price:55.00, category:"GLP-1"},
+  {id:2,  name:"Retatrutide",       strength:"20mg",  price:99.00, category:"GLP-1"},
+  {id:3,  name:"Tirzepatide",       strength:"10mg",  price:42.00, category:"GLP-1"},
+  {id:4,  name:"Tirzepatide",       strength:"20mg",  price:85.00, category:"GLP-1"},
+  {id:5,  name:"Semaglutide",       strength:"5mg",   price:35.00, category:"GLP-1"},
+  {id:6,  name:"Semaglutide",       strength:"10mg",  price:52.00, category:"GLP-1"},
+  {id:7,  name:"Tesamorelin",       strength:"2mg",   price:36.00, category:"Growth Hormone"},
+  {id:8,  name:"Tesamorelin",       strength:"5mg",   price:52.00, category:"Growth Hormone"},
+  {id:9,  name:"CJC-1295 (no DAC)",strength:"2mg",   price:22.00, category:"Growth Hormone"},
+  {id:10, name:"CJC-1295 (no DAC)",strength:"5mg",   price:36.00, category:"Growth Hormone"},
+  {id:11, name:"Ipamorelin",        strength:"2mg",   price:14.00, category:"Growth Hormone"},
+  {id:12, name:"Ipamorelin",        strength:"5mg",   price:22.00, category:"Growth Hormone"},
+  {id:13, name:"GHK-Cu",            strength:"50mg",  price:28.00, category:"Repair"},
+  {id:14, name:"GHK-Cu",            strength:"100mg", price:42.00, category:"Repair"},
+  {id:15, name:"BPC-157",           strength:"5mg",   price:15.00, category:"Repair"},
+  {id:16, name:"BPC-157",           strength:"10mg",  price:24.00, category:"Repair"},
+  {id:17, name:"Epithalon",         strength:"10mg",  price:19.00, category:"Longevity"},
+  {id:18, name:"TB-500",            strength:"5mg",   price:24.00, category:"Repair"},
+  {id:19, name:"TB-500",            strength:"10mg",  price:42.00, category:"Repair"},
+];
+
+// -- CART ----------------------------------------------------------------------
+let cart = JSON.parse(localStorage.getItem('clarix_cart') || '[]');
+function saveCart() { localStorage.setItem('clarix_cart', JSON.stringify(cart)); }
+function updateCartBadge() {
+  const total = cart.reduce((s,i) => s+i.qty, 0);
+  const b = document.getElementById('cart-badge');
+  b.textContent = total;
+  b.classList.toggle('show', total > 0);
+}
+function renderCartDrawer() {
+  const el = document.getElementById('cart-items-el');
+  const foot = document.getElementById('cart-footer-el');
+  if (!cart.length) {
+    el.innerHTML = '<div class="cart-empty"><div class="ce-icon">??</div><p style="font-weight:600;margin-bottom:4px">Your basket is empty</p><p style="font-size:.8rem">Browse our research compounds to get started</p></div>';
+    foot.innerHTML = ''; return;
+  }
+  el.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="ci-img" style="background:var(--navy)"></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-str">${item.strength}</div>
+        <div class="ci-ctrl">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">-</button>
+          <span class="qty-n">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <div class="ci-price">�${(item.price*item.qty).toFixed(2)}</div>
+        <button class="ci-rm" onclick="removeFromCart(${item.id})">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
+      </div>
+    </div>`).join('');
+  const sub = cart.reduce((s,i) => s+i.price*i.qty, 0);
+  const ship = sub >= 50 ? 0 : 3.99;
+  foot.innerHTML = `
+    <div class="cd-sub"><span>Subtotal</span><span>�${sub.toFixed(2)}</span></div>
+    <div class="cd-sub"><span>Shipping</span><span>${ship===0?'<span style="color:var(--teal);font-weight:600">FREE</span>':'�'+ship.toFixed(2)}</span></div>
+    <div class="cd-tot"><span>Total</span><span>�${(sub+ship).toFixed(2)}</span></div>
+    <button class="checkout-btn" onclick="proceedCheckout()">Proceed to Checkout</button>
+    ${sub<50?`<p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:10px">Spend �${(50-sub).toFixed(2)} more for free shipping</p>`:''}`;
+}
+function openCart(){ document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-backdrop').classList.add('open'); renderCartDrawer(); }
+function closeCart(){ document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('cart-backdrop').classList.remove('open'); }
+function removeFromCart(id){ cart=cart.filter(x=>x.id!==id); saveCart(); updateCartBadge(); renderCartDrawer(); }
+function changeQty(id, delta){ const i=cart.find(x=>x.id===id); if(!i) return; i.qty=Math.max(1,i.qty+delta); saveCart(); updateCartBadge(); renderCartDrawer(); }
+function proceedCheckout(){
+  if(!cart.length) return;
+  if(!JSON.parse(sessionStorage.getItem('clarix_session')||'null')){ closeCart(); openAcct(); showToast('Please sign in to continue to checkout'); return; }
+  showToast('Redirecting to secure checkout�');
+}
+
+// -- ACCOUNT -------------------------------------------------------------------
+function getAccounts(){ return JSON.parse(localStorage.getItem('clarix_accounts')||'[]'); }
+function saveAccounts(a){ localStorage.setItem('clarix_accounts',JSON.stringify(a)); }
+function getSession(){ return JSON.parse(sessionStorage.getItem('clarix_session')||'null'); }
+function openAcct(){ document.getElementById('acct-modal').classList.add('open'); renderAcctModal(); }
+function closeAcct(){ document.getElementById('acct-modal').classList.remove('open'); }
+function renderAcctModal(tab){
+  const session=getSession(); const body=document.getElementById('acct-modal-body');
+  if(session){ body.innerHTML=`<div class="loggedin"><div style="width:56px;height:56px;border-radius:50%;background:rgba(43,181,165,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--teal)"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Welcome back!</h3><p>${session.name}<br><span style="color:var(--muted);font-size:.8rem">${session.email}</span></p><div style="display:flex;gap:10px;justify-content:center"><button class="signout-btn" onclick="signOut()">Sign Out</button><button class="fb" style="flex:1;max-width:160px" onclick="closeAcct()">Continue</button></div></div>`; return; }
+  const at=tab||'signin';
+  body.innerHTML=`<div class="mtabs"><button class="mtab ${at==='signin'?'active':''}" onclick="renderAcctModal('signin')">Sign In</button><button class="mtab ${at==='register'?'active':''}" onclick="renderAcctModal('register')">Create Account</button></div>${at==='signin'?`<form onsubmit="doSignIn(event)"><div class="fg"><label class="fl">Email</label><input class="fi" type="email" id="si-email" placeholder="you@example.com" required></div><div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="si-pass" placeholder="��������" required></div><div id="si-msg"></div><button type="submit" class="fb">Sign In</button></form>`:`<form onsubmit="doRegister(event)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="fg"><label class="fl">First Name</label><input class="fi" type="text" id="reg-first" placeholder="Jane" required></div><div class="fg"><label class="fl">Last Name</label><input class="fi" type="text" id="reg-last" placeholder="Smith" required></div></div><div class="fg"><label class="fl">Email</label><input class="fi" type="email" id="reg-email" placeholder="you@example.com" required></div><div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="reg-pass" placeholder="Min. 8 characters" required minlength="8"></div><div class="fg"><label class="fl">Confirm Password</label><input class="fi" type="password" id="reg-pass2" placeholder="Repeat password" required></div><label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:14px"><input type="checkbox" required style="width:15px;height:15px;accent-color:var(--teal);flex-shrink:0;margin-top:2px">I confirm I am 18+ and a licensed researcher. I agree to the Terms &amp; Conditions and Privacy Policy.</label><div id="reg-msg"></div><button type="submit" class="fb">Create Account</button></form>`}`;
+}
+function doSignIn(e){
+  e.preventDefault();
+  const email=document.getElementById('si-email').value.trim().toLowerCase();
+  const pass=document.getElementById('si-pass').value;
+  const user=getAccounts().find(a=>a.email===email&&a.password===pass);
+  const msg=document.getElementById('si-msg');
+  if(!user){msg.innerHTML='<p class="merr">Invalid email or password.</p>';return;}
+  sessionStorage.setItem('clarix_session',JSON.stringify({email:user.email,name:user.name}));
+  renderAcctModal(); showToast(`Welcome back, <span class="t-teal">${user.name.split(' ')[0]}</span>!`);
+}
+function doRegister(e){
+  e.preventDefault();
+  const first=document.getElementById('reg-first').value.trim();
+  const last=document.getElementById('reg-last').value.trim();
+  const email=document.getElementById('reg-email').value.trim().toLowerCase();
+  const pass=document.getElementById('reg-pass').value;
+  const pass2=document.getElementById('reg-pass2').value;
+  const msg=document.getElementById('reg-msg');
+  if(pass!==pass2){msg.innerHTML='<p class="merr">Passwords do not match.</p>';return;}
+  const accounts=getAccounts();
+  if(accounts.find(a=>a.email===email)){msg.innerHTML='<p class="merr">An account with this email already exists.</p>';return;}
+  const name=`${first} ${last}`;
+  accounts.push({email,password:pass,name}); saveAccounts(accounts);
+  sessionStorage.setItem('clarix_session',JSON.stringify({email,name}));
+  renderAcctModal(); showToast(`Account created! Welcome, <span class="t-teal">${first}</span>!`);
+}
+function signOut(){ sessionStorage.removeItem('clarix_session'); renderAcctModal('signin'); showToast('You have been signed out'); }
+
+// -- SEARCH --------------------------------------------------------------------
+function openSearch(){ document.getElementById('search-overlay').classList.add('open'); setTimeout(()=>document.getElementById('search-input').focus(),100); }
+function closeSearch(){ document.getElementById('search-overlay').classList.remove('open'); document.getElementById('search-results').classList.remove('show'); document.getElementById('search-input').value=''; }
+document.getElementById('search-input').addEventListener('input',function(){
+  const q=this.value.toLowerCase().trim(); const res=document.getElementById('search-results');
+  if(!q){res.classList.remove('show');return;}
+  const m=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||p.strength.toLowerCase().includes(q));
+  if(!m.length){res.innerHTML='<div class="sr-item"><div><div class="sr-name">No results found</div></div></div>';res.classList.add('show');return;}
+  res.innerHTML=m.slice(0,8).map(p=>`<div class="sr-item" onclick="window.location='shop.html'"><div><div class="sr-name">${p.name} ${p.strength}</div><div class="sr-cat">${p.category}</div></div><div class="sr-price">�${p.price.toFixed(2)}</div></div>`).join('');
+  res.classList.add('show');
+});
+
+// -- TOAST ---------------------------------------------------------------------
+let toastTimer;
+function showToast(msg){ const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3200); }
+
+// -- NAV + MOBILE ---------------------------------------------------------------
+window.addEventListener('scroll',()=>{ document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>10); updateSectionTabs(); });
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.add('open'));
+document.getElementById('mm-close').addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open'));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeSearch();closeAcct();} });
+document.getElementById('acct-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAcct();});
+document.getElementById('search-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSearch();});
+document.getElementById('search-btn').addEventListener('click',openSearch);
+document.getElementById('search-close').addEventListener('click',closeSearch);
+document.getElementById('acct-btn').addEventListener('click',openAcct);
+document.getElementById('cart-btn').addEventListener('click',openCart);
+
+// -- SECTION TAB HIGHLIGHTING --------------------------------------------------
+const SECTIONS = ['receiving','reconstitution','storage','tips','calculator'];
+function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+function updateSectionTabs(){
+  const tabs = document.querySelectorAll('.st-tab');
+  let active = 0;
+  SECTIONS.forEach((id,i)=>{ const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<=180) active=i; });
+  tabs.forEach((t,i)=>t.classList.toggle('active',i===active));
+}
+
+// -- PEPTIDE CALCULATOR V2 -----------------------------------------------------
+const PEPTIDE_PRESETS = [
+  {label:'BPC-157 5mg',mg:5},   {label:'BPC-157 10mg',mg:10},
+  {label:'TB-500 5mg',mg:5},    {label:'TB-500 10mg',mg:10},
+  {label:'Semaglutide 5mg',mg:5},{label:'Semaglutide 10mg',mg:10},
+  {label:'Tirzepatide 10mg',mg:10},{label:'Tirzepatide 20mg',mg:20},
+  {label:'Retatrutide 10mg',mg:10},{label:'Ipamorelin 2mg',mg:2},
+  {label:'Ipamorelin 5mg',mg:5}, {label:'GHK-Cu 50mg',mg:50},
+  {label:'Epithalon 10mg',mg:10},{label:'CJC-1295 2mg',mg:2},
+];
+
+function initPeptidePills(){
+  const c = document.getElementById('peptide-pills');
+  if(!c) return;
+  c.innerHTML = PEPTIDE_PRESETS.map(p =>
+    `<button class="peptide-pill" onclick="selectPeptide(${p.mg},this)">${p.label}</button>`
+  ).join('');
+}
+
+function selectPeptide(mg, btn){
+  document.querySelectorAll('.peptide-pill').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  document.getElementById('inp-mg').value = mg;
+  document.getElementById('sl-mg').value  = Math.min(50, mg);
+  document.querySelectorAll('#mg-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+  calcReconstitution();
+}
+
+function syncSlider(type, val){
+  const v = parseFloat(val);
+  if(type==='mg'){
+    document.getElementById('inp-mg').value = v % 1 === 0 ? v : v.toFixed(1);
+    document.querySelectorAll('#mg-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+    document.querySelectorAll('.peptide-pill').forEach(b=>b.classList.remove('sel'));
+  } else {
+    document.getElementById('inp-ml').value = v % 1 === 0 ? v : v.toFixed(1);
+    document.querySelectorAll('#ml-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+  }
+  calcReconstitution();
+}
+
+function syncInput(type, val){
+  if(type==='mg'){
+    const v = Math.min(50, Math.max(0.5, parseFloat(val)||0));
+    document.getElementById('sl-mg').value = v;
+    document.querySelectorAll('#mg-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+    document.querySelectorAll('.peptide-pill').forEach(b=>b.classList.remove('sel'));
+  } else {
+    const v = Math.min(5, Math.max(0.1, parseFloat(val)||0));
+    document.getElementById('sl-ml').value = v;
+    document.querySelectorAll('#ml-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+  }
+  calcReconstitution();
+}
+
+const _numAnim = {};
+function animNum(elId, newVal, formatter){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  if(newVal === null || isNaN(newVal) || !isFinite(newVal)){ el.textContent = '—'; return; }
+  const prev = _numAnim[elId] || 0;
+  _numAnim[elId] = newVal;
+  const start = Date.now(), dur = 320, from = prev;
+  function tick(){
+    const p = Math.min((Date.now()-start)/dur, 1);
+    const ease = 1 - Math.pow(1-p, 3);
+    el.textContent = formatter(from + (newVal - from) * ease);
+    if(p < 1) requestAnimationFrame(tick);
+    else el.textContent = formatter(newVal);
+  }
+  requestAnimationFrame(tick);
+}
+
+function fmtNum(n){
+  if(n===null||isNaN(n)||!isFinite(n)) return '—';
+  if(n>=10000) return n.toLocaleString('en-GB',{maximumFractionDigits:0});
+  if(n>=100)   return n.toLocaleString('en-GB',{maximumFractionDigits:1});
+  if(n>=1)     return n.toFixed(2).replace(/\.?0+$/,'');
+  return n.toFixed(4).replace(/\.?0+$/,'');
+}
+
+function updateSyringe(iu){
+  const fill  = document.getElementById('syringe-fill');
+  const label = document.getElementById('syringe-pct');
+  if(!fill) return;
+  if(!iu || isNaN(iu) || iu <= 0){
+    fill.style.height = '0%';
+    if(label) label.textContent = '— IU';
+    return;
+  }
+  const pct = Math.min(iu / 100 * 100, 100);
+  fill.style.height = pct + '%';
+  if(label) label.textContent = fmtNum(iu) + ' IU';
+}
+
+function calcReconstitution(){
+  const mg = parseFloat(document.getElementById('inp-mg').value);
+  const ml = parseFloat(document.getElementById('inp-ml').value);
+  if(!mg || !ml || mg<=0 || ml<=0){
+    document.getElementById('out-conc').textContent   = '—';
+    document.getElementById('out-per-iu').textContent = '—';
+    renderDoseTable(0, 0);
+    return;
+  }
+  const conc  = (mg * 1000) / ml;
+  const perIU = conc / 100;
+  animNum('out-conc',   conc,  fmtNum);
+  animNum('out-per-iu', perIU, fmtNum);
+  calcDosing();
+}
+
+function calcDosing(){
+  const mg   = parseFloat(document.getElementById('inp-mg').value);
+  const ml   = parseFloat(document.getElementById('inp-ml').value);
+  const conc = (mg > 0 && ml > 0) ? (mg * 1000) / ml : 0;
+  const dose = parseFloat(document.getElementById('inp-dose').value);
+  const volCard = document.getElementById('dose-vol-card');
+  const iuCard  = document.getElementById('dose-iu-card');
+  const dpvEl   = document.getElementById('out-dpv');
+  const dpvSub  = document.getElementById('out-dpv-sub');
+  if(conc > 0 && dose > 0){
+    const vol = dose / conc;
+    const iu  = vol * 100;
+    const dpv = Math.floor((mg * 1000) / dose);
+    animNum('out-vol', vol, v => v.toFixed(4).replace(/\.?0+$/,''));
+    animNum('out-iu',  iu,  v => v.toFixed(2).replace(/\.?0+$/,''));
+    animNum('out-dpv', dpv, v => Math.round(v).toLocaleString('en-GB'));
+    if(volCard) volCard.style.opacity = '1';
+    if(iuCard)  iuCard.style.opacity  = '1';
+    if(dpvSub)  dpvSub.textContent = 'at ' + (dose>=1000 ? (dose/1000)+'mg' : dose+'mcg') + ' per dose';
+    updateSyringe(iu);
+  } else {
+    document.getElementById('out-vol').textContent = '—';
+    document.getElementById('out-iu').textContent  = '—';
+    if(dpvEl)  dpvEl.textContent  = '—';
+    if(dpvSub) dpvSub.textContent = conc > 0 ? 'Enter a dose above' : 'Configure vial first';
+    if(volCard) volCard.style.opacity = '0.25';
+    if(iuCard)  iuCard.style.opacity  = '0.25';
+    updateSyringe(0);
+  }
+  renderDoseTable(conc, dose);
+}
+
+function renderDoseTable(conc, hlDose){
+  const tbody = document.getElementById('dose-table-body');
+  if(!tbody) return;
+  if(!conc || conc <= 0){
+    tbody.innerHTML = '<tr><td class="dose-empty" colspan="3">Configure vial above to generate table.</td></tr>';
+    return;
+  }
+  const doses = [50,100,150,200,250,300,400,500,600,750,1000,1500,2000];
+  const maxIU = doses.reduce((m,d) => Math.max(m, Math.min((d/conc)*100, 100)), 0);
+  tbody.innerHTML = doses.map(d => {
+    const vol = d / conc, iu = vol * 100;
+    const hl  = hlDose && Math.abs(d - hlDose) < 0.5;
+    const lbl = d >= 1000 ? (d/1000) + 'mg' : d + 'mcg';
+    const barPct = maxIU > 0 ? Math.min(iu/maxIU*100, 100).toFixed(1) : 0;
+    return `<tr class="${hl?'hl':''}">
+      <td>${lbl}</td>
+      <td style="position:relative;padding-bottom:11px">${vol.toFixed(4).replace(/\.?0+$/,'')}
+        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.04)"><div style="height:100%;width:${barPct}%;background:rgba(43,181,165,${hl?'.55':'.22'});transition:width .3s ease"></div></div>
+      </td>
+      <td>${iu.toFixed(2).replace(/\.?0+$/,'')}</td>
+    </tr>`;
+  }).join('');
+}
+
+function setPreset(type, val, btn){
+  if(type==='mg'){
+    document.getElementById('inp-mg').value = val;
+    document.getElementById('sl-mg').value  = Math.min(50, val);
+    document.querySelectorAll('#mg-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+    document.querySelectorAll('.peptide-pill').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel'); calcReconstitution();
+  } else {
+    document.getElementById('inp-ml').value = val;
+    document.getElementById('sl-ml').value  = Math.min(5, val);
+    document.querySelectorAll('#ml-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel'); calcReconstitution();
+  }
+}
+function setDosePreset(val, btn){
+  document.getElementById('inp-dose').value = val;
+  document.querySelectorAll('#dose-presets .ci-preset').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel'); calcDosing();
+}
+function onMgChange(){ document.querySelectorAll('#mg-presets .ci-preset').forEach(b=>b.classList.remove('sel')); calcReconstitution(); }
+function onMlChange(){ document.querySelectorAll('#ml-presets .ci-preset').forEach(b=>b.classList.remove('sel')); calcReconstitution(); }
+
+// -- INIT ----------------------------------------------------------------------
+updateCartBadge();
+initPeptidePills();
+calcReconstitution();
+</script>
+</body>
+</html>

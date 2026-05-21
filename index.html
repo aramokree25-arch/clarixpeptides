@@ -24,12 +24,12 @@
 body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--navy);overflow-x:hidden}
 h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 
-/* ── DISCLAIMER BAR ── */
+/* -- DISCLAIMER BAR -- */
 #disc-bar{background:var(--navy);color:rgba(255,255,255,.8);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;padding:9px 48px 9px 20px;text-align:center;position:relative;line-height:1.4}
 #disc-bar button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:1.1rem;line-height:1;transition:color .2s}
 #disc-bar button:hover{color:#fff}
 
-/* ── NAV ── */
+/* -- NAV -- */
 #main-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--gray-100);transition:box-shadow .3s}
 #main-nav.scrolled{box-shadow:0 4px 24px rgba(15,34,64,.08)}
 .nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px;height:82px}
@@ -48,7 +48,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 @media(max-width:900px){.nav-links{display:none}}
 @media(max-width:640px){#hamburger{display:flex}}
 
-/* ── SEARCH OVERLAY ── */
+/* -- SEARCH OVERLAY -- */
 #search-overlay{position:fixed;inset:0;z-index:200;background:rgba(15,34,64,.55);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
 #search-overlay.open{opacity:1;pointer-events:all}
 .search-panel{background:#fff;padding:28px 32px}
@@ -66,7 +66,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .sr-cat{font-size:.75rem;color:var(--muted);margin-top:2px}
 .sr-price{font-weight:700;font-size:.9rem;color:var(--teal);font-family:'Outfit',sans-serif}
 
-/* ── HERO ── */
+/* -- HERO -- */
 .hero{background:#fff;position:relative;overflow:hidden;padding:80px 24px 72px}
 .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}}
@@ -83,7 +83,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .hero-mol{width:100%;max-width:420px;animation:float 6s ease-in-out infinite;position:relative;z-index:1}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
-/* ── SEARCH BAR SECTION (UK SARMS style) ── */
+/* -- SEARCH BAR SECTION (UK SARMS style) -- */
 .search-section{background:#fff;padding:48px 24px;border-bottom:1px solid var(--gray-100)}
 .ss-inner{max-width:900px;margin:0 auto;text-align:center}
 .ss-label{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
@@ -103,7 +103,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .sd-free{color:var(--teal);font-weight:600}
 .sd-sep{color:var(--gray-100);font-size:1rem}
 
-/* ── FEATURED PRODUCTS (Seed.com style) ── */
+/* -- FEATURED PRODUCTS (Seed.com style) -- */
 .feat-section{padding:72px 24px 80px;background:#fff}
 .feat-inner{max-width:1200px;margin:0 auto}
 .feat-hd{text-align:center;margin-bottom:52px}
@@ -138,7 +138,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .shopall-btn svg{transition:transform .2s}
 .shopall-btn:hover svg{transform:translateX(3px)}
 
-/* ── VIAL / SCIENCE SECTION ── */
+/* -- VIAL / SCIENCE SECTION -- */
 .vial-section{background:var(--off-white);padding:80px 24px}
 .vs-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 @media(max-width:900px){.vs-inner{grid-template-columns:1fr}.vs-img-col{order:-1;text-align:center}}
@@ -154,10 +154,10 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .vs-point-text strong{display:block;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:2px}
 .vs-point-text span{font-size:.82rem;color:var(--muted);line-height:1.5}
 
-/* ── (keep for JS compat) ── */
+/* -- (keep for JS compat) -- */
 .no-products{text-align:center;padding:60px 20px;color:var(--muted);font-size:.95rem}
 
-/* ── STATS ── */
+/* -- STATS -- */
 .stats-bar{background:var(--teal);padding:36px 24px}
 .stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
 .stat-item{padding:16px;border-right:1px solid rgba(255,255,255,.2)}
@@ -166,7 +166,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .stat-lbl{font-size:.78rem;color:rgba(255,255,255,.75);font-weight:500}
 @media(max-width:640px){.stats-inner{grid-template-columns:1fr 1fr}.stat-item:nth-child(2){border-right:none}.stat-item{border-bottom:1px solid rgba(255,255,255,.15)}.stat-item:nth-last-child(-n+2){border-bottom:none}}
 
-/* ── TRUST SECTION ── */
+/* -- TRUST SECTION -- */
 .trust-section{background:var(--navy);padding:72px 24px}
 .trust-inner{max-width:1200px;margin:0 auto}
 .trust-hd{text-align:center;margin-bottom:52px}
@@ -181,7 +181,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .tc h3{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:7px}
 .tc p{font-size:.79rem;color:rgba(255,255,255,.78);line-height:1.6}
 
-/* ── QUALITY ── */
+/* -- QUALITY -- */
 .quality-section{background:#fff;padding:80px 24px}
 .qi{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 @media(max-width:900px){.qi{grid-template-columns:1fr}}
@@ -201,7 +201,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .cert-title{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:6px}
 .cert-sub{font-size:.82rem;color:var(--muted);line-height:1.6}
 
-/* ── NEWSLETTER ── */
+/* -- NEWSLETTER -- */
 .nl-section{padding:80px 24px;background:#fff}
 .nl-inner{max-width:600px;margin:0 auto;text-align:center}
 .nl-pill{display:inline-block;background:rgba(43,181,165,.1);color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:18px}
@@ -216,7 +216,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .nl-btn:active{transform:translateY(0)}
 .nl-legal{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.6}
 
-/* ── CART DRAWER ── */
+/* -- CART DRAWER -- */
 #cart-backdrop{position:fixed;inset:0;z-index:290;background:rgba(15,34,64,.4);opacity:0;pointer-events:none;transition:opacity .35s}
 #cart-backdrop.open{opacity:1;pointer-events:all}
 #cart-drawer{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#fff;z-index:300;box-shadow:-8px 0 40px rgba(15,34,64,.15);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
@@ -248,7 +248,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .checkout-btn{width:100%;padding:15px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
 .checkout-btn:hover{background:var(--teal)}
 
-/* ── ACCOUNT MODAL ── */
+/* -- ACCOUNT MODAL -- */
 #acct-modal{position:fixed;inset:0;z-index:250;background:rgba(15,34,64,.5);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;padding:16px}
 #acct-modal.open{opacity:1;pointer-events:all}
 .modal-box{background:#fff;border-radius:20px;padding:36px;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(15,34,64,.2);transform:scale(.95) translateY(10px);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
@@ -272,7 +272,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .signout-btn{padding:11px 28px;background:var(--gray-50);color:var(--navy);border:1px solid var(--gray-100);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:600;cursor:pointer;transition:background .2s}
 .signout-btn:hover{background:var(--gray-100)}
 
-/* ── POPUP ── */
+/* -- POPUP -- */
 #popup-overlay{position:fixed;inset:0;z-index:400;background:rgba(15,34,64,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:16px}
 #popup-overlay.open{opacity:1;pointer-events:all}
 .popup-box{background:#fff;border-radius:20px;width:100%;max-width:540px;overflow:hidden;box-shadow:0 24px 80px rgba(15,34,64,.25);transform:scale(.9);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
@@ -297,14 +297,14 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .popup-legal{font-size:.68rem;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
 .popup-legal a{color:var(--teal);text-decoration:none}
 
-/* ── MOBILE MENU ── */
+/* -- MOBILE MENU -- */
 #mobile-menu{position:fixed;inset:0;z-index:200;background:#fff;padding:76px 28px 28px;transform:translateX(-100%);transition:transform .3s ease}
 #mobile-menu.open{transform:translateX(0)}
 .mm-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:10px;border:1px solid var(--gray-100);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy)}
 .mm-link{display:block;padding:15px 0;font-size:1.2rem;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gray-100);transition:color .15s}
 .mm-link:hover{color:var(--teal)}
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 .footer{background:var(--navy);padding:60px 24px 28px;color:rgba(255,255,255,.6)}
 .fi2{max-width:1200px;margin:0 auto}
 .fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
@@ -319,12 +319,12 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .f-legal{font-size:.68rem;color:rgba(255,255,255,.3);line-height:1.7;max-width:600px}
 .f-copy{font-size:.72rem;color:rgba(255,255,255,.3);white-space:nowrap}
 
-/* ── TOAST ── */
+/* -- TOAST -- */
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:40px;font-size:.85rem;font-weight:500;z-index:500;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(15,34,64,.25);pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
 .t-teal{color:var(--teal);font-weight:700}
 
-/* ── ANIMATIONS ── */
+/* -- ANIMATIONS -- */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .fiu{opacity:0;animation:fadeInUp .65s ease forwards}
 .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}
@@ -335,7 +335,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <!-- DISCLAIMER BAR -->
 <div id="disc-bar">
   PRODUCTS SOLD ON CLARIXPEPTIDES.COM ARE FOR RESEARCH PURPOSES ONLY AND ARE NOT FOR HUMAN OR VETERINARY USE.
-  <button onclick="this.parentElement.style.display='none'" aria-label="Dismiss">×</button>
+  <button onclick="this.parentElement.style.display='none'" aria-label="Dismiss">�</button>
 </div>
 
 <!-- MAIN NAV -->
@@ -346,13 +346,11 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     </a>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#">Wholesale</a>
-      <a href="#">Usage Guide</a>
-      <a href="#">FAQ</a>
-      <a href="#">Blog</a>
-      <a href="#">About Us</a>
-      <a href="#">Contact Us</a>
+      <a href="shop.html">Shop</a>
+      <a href="wholesale.html">Wholesale</a>
+      <a href="usage-guide.html">Usage Guide</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
     </div>
     <div class="nav-actions">
       <!-- Search -->
@@ -382,13 +380,11 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
   <a class="mm-link" href="#">Home</a>
-  <a class="mm-link" href="#shop">Shop</a>
-  <a class="mm-link" href="#">Wholesale</a>
+  <a class="mm-link" href="shop.html">Shop</a>
+  <a class="mm-link" href="wholesale.html">Wholesale</a>
   <a class="mm-link" href="#">Usage Guide</a>
-  <a class="mm-link" href="#">FAQ</a>
-  <a class="mm-link" href="#">Blog</a>
-  <a class="mm-link" href="#">About Us</a>
-  <a class="mm-link" href="#">Contact Us</a>
+  <a class="mm-link" href="about.html">About Us</a>
+  <a class="mm-link" href="contact.html">Contact Us</a>
 </div>
 
 <!-- SEARCH OVERLAY -->
@@ -396,7 +392,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
   <div class="search-panel">
     <div class="search-wrap">
       <svg class="si" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="search-input" placeholder="Search peptides, compounds…" autocomplete="off">
+      <input type="text" id="search-input" placeholder="Search peptides, compounds�" autocomplete="off">
       <button class="sc" id="search-close">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
@@ -411,9 +407,9 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <div class="hero-text">
       <p style="font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin-bottom:14px" class="fiu">UK's Premium Research Compounds</p>
       <h1 class="fiu d1">Precision Peptides<br>for <span class="t">Advanced</span><br>Research</h1>
-      <p class="fiu d2">High-purity, independently verified peptide compounds. All products are ≥98% purity, manufactured under strict quality controls and supplied with full Certificates of Analysis.</p>
+      <p class="fiu d2">High-purity, independently verified peptide compounds. All products are =98% purity, manufactured under strict quality controls and supplied with full Certificates of Analysis.</p>
       <div class="hero-cta-row fiu d3">
-        <a href="#shop" class="hero-cta-primary">Shop Compounds <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="shop.html" class="hero-cta-primary">Shop Compounds <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
     <div class="hero-visual">
@@ -493,7 +489,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <p class="ss-label">Browse Our Catalogue</p>
     <h2 class="ss-title">Find Your Research Compound</h2>
     <div class="ss-bar">
-      <input type="text" id="ss-input" placeholder="Search by compound name, strength or category…" autocomplete="off" oninput="filterProducts()">
+      <input type="text" id="ss-input" placeholder="Search by compound name, strength or category�" autocomplete="off" oninput="filterProducts()">
       <select id="ss-cat-select" onchange="filterProducts()">
         <option value="">All Categories</option>
         <option value="GLP-1">GLP-1</option>
@@ -507,9 +503,9 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       <button class="ss-cat" onclick="setCat('Growth Hormone',this)">Growth Hormone Peptides</button>
     </div>
     <div class="ss-delivery">
-      <span class="sd-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Next-day UK delivery on orders before 3pm, Mon–Sat</span>
-      <span class="sd-sep">·</span>
-      <span class="sd-item sd-free"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Free shipping on all orders over £50</span>
+      <span class="sd-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Next-day UK delivery on orders before 3pm, Mon�Sat</span>
+      <span class="sd-sep">�</span>
+      <span class="sd-item sd-free"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Free shipping on all orders over �50</span>
     </div>
   </div>
 </section>
@@ -540,7 +536,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
             </select>
           </div>
           <div class="feat-price-row">
-            <div class="feat-price" id="ret-price">£55.00</div>
+            <div class="feat-price" id="ret-price">�55.00</div>
           </div>
           <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -561,7 +557,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
             </select>
           </div>
           <div class="feat-price-row">
-            <div class="feat-price" id="ghk-price">£28.00</div>
+            <div class="feat-price" id="ghk-price">�28.00</div>
           </div>
           <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -582,7 +578,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
             </select>
           </div>
           <div class="feat-price-row">
-            <div class="feat-price" id="bpc-price">£15.00</div>
+            <div class="feat-price" id="bpc-price">�15.00</div>
           </div>
           <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -603,7 +599,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
             </select>
           </div>
           <div class="feat-price-row">
-            <div class="feat-price" id="tb-price">£24.00</div>
+            <div class="feat-price" id="tb-price">�24.00</div>
           </div>
           <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
@@ -611,7 +607,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 
     </div>
     <div class="feat-footer">
-      <a href="#" class="shopall-btn">
+      <a href="shop.html" class="shopall-btn">
         View All Compounds
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -629,7 +625,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <div class="vs-text-col">
       <div class="eyebrow">The Science Behind Clarix</div>
       <h2>Peptides Engineered for Precision Research</h2>
-      <p>Every compound in the Clarix catalogue is manufactured to exacting research standards — lyophilised for maximum stability, independently verified by third-party laboratories, and supplied with full documentation so your research starts on solid ground.</p>
+      <p>Every compound in the Clarix catalogue is manufactured to exacting research standards � lyophilised for maximum stability, independently verified by third-party laboratories, and supplied with full documentation so your research starts on solid ground.</p>
       <div class="vs-points">
         <div class="vs-point">
           <div class="vs-point-icon">
@@ -666,7 +662,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num">≥98%</div><div class="stat-lbl">Purity Guaranteed</div></div>
+    <div class="stat-item"><div class="stat-num">=98%</div><div class="stat-lbl">Purity Guaranteed</div></div>
     <div class="stat-item"><div class="stat-num">4,800+</div><div class="stat-lbl">Orders Fulfilled</div></div>
     <div class="stat-item"><div class="stat-num">24hr</div><div class="stat-lbl">UK Dispatch</div></div>
     <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">COA Verified</div></div>
@@ -692,8 +688,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         <div class="tc-icon">
           <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
         </div>
-        <h3>≥98% Purity</h3>
-        <p>Our compounds consistently achieve ≥98% purity via HPLC analysis — industry-leading standards.</p>
+        <h3>=98% Purity</h3>
+        <p>Our compounds consistently achieve =98% purity via HPLC analysis � industry-leading standards.</p>
       </div>
       <div class="tc">
         <div class="tc-icon">
@@ -732,7 +728,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
   <div class="qi">
     <div class="qt">
       <h2>Lab-Verified Purity. Every Batch. No Exceptions.</h2>
-      <p>At Clarix Peptides, quality isn't a marketing claim — it's a measurable standard. Every product in our catalogue undergoes rigorous third-party HPLC and mass spectrometry testing before it ever reaches you.</p>
+      <p>At Clarix Peptides, quality isn't a marketing claim � it's a measurable standard. Every product in our catalogue undergoes rigorous third-party HPLC and mass spectrometry testing before it ever reaches you.</p>
       <div class="qp">
         <div class="qp-item">
           <div class="qp-check"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -770,7 +766,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         </div>
         <div class="cert-text">
           <div class="cert-title">Lab Verified</div>
-          <div class="cert-sub">All compounds are independently verified by UK-accredited third-party labs, with ≥98% HPLC purity confirmed on every production run.</div>
+          <div class="cert-sub">All compounds are independently verified by UK-accredited third-party labs, with =98% HPLC purity confirmed on every production run.</div>
         </div>
       </div>
 
@@ -805,7 +801,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
   <div class="nl-inner">
     <div class="nl-pill">Exclusive Offer</div>
     <h2 class="nl-title">Get <span class="hl">15% off</span><br>your first order</h2>
-    <p class="nl-sub">Sign up and receive a single-use 15% discount code. Minimum order £40. UK only.</p>
+    <p class="nl-sub">Sign up and receive a single-use 15% discount code. Minimum order �40. UK only.</p>
     <form class="nl-form" onsubmit="submitNewsletter(event)">
       <input class="nl-input" type="email" id="nl-email" placeholder="you@example.com" required>
       <input class="nl-input" type="tel" id="nl-phone" placeholder="07700 900000">
@@ -837,15 +833,13 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       </div>
       <div class="fc">
         <h4>Company</h4>
-        <a href="#">About Us</a>
-        <a href="#">Wholesale</a>
-        <a href="#">Blog</a>
-        <a href="#">Usage Guide</a>
-        <a href="#">FAQ</a>
-      </div>
+        <a href="about.html">About Us</a>
+        <a href="wholesale.html">Wholesale</a>
+          <a href="usage-guide.html">Usage Guide</a>
+        </div>
       <div class="fc">
         <h4>Support</h4>
-        <a href="#">Contact Us</a>
+        <a href="contact.html">Contact Us</a>
         <a href="#">Shipping Policy</a>
         <a href="#">Returns</a>
         <a href="#">Privacy Policy</a>
@@ -854,7 +848,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     </div>
     <div class="footer-bot">
       <p class="f-legal">All products sold by Clarix Peptides are intended for research purposes only and are not approved by the MHRA, FDA, or any other regulatory body for human or veterinary use. Products must only be handled by qualified, licensed researchers. By purchasing, you confirm you are 18+ and a licensed researcher. Clarix Peptides accepts no liability for misuse.</p>
-      <p class="f-copy">© 2025 Clarix Peptides Ltd. All rights reserved.</p>
+      <p class="f-copy">� 2025 Clarix Peptides Ltd. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -889,19 +883,19 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <div id="popup-overlay">
   <div class="popup-box">
     <div class="popup-top">
-      <button class="popup-close" onclick="closePopup()">×</button>
+      <button class="popup-close" onclick="closePopup()">�</button>
       <div class="popup-disc">15% off</div>
       <div class="popup-title">your first order</div>
-      <div class="popup-sub">Sign up and get a single-use 15% discount code.<br>Minimum order £40.</div>
+      <div class="popup-sub">Sign up and get a single-use 15% discount code.<br>Minimum order �40.</div>
     </div>
     <div class="popup-bot">
       <form class="popup-form" onsubmit="submitPopup(event)">
         <input class="fi" type="email" id="popup-email" placeholder="you@example.com" required>
         <div class="popup-phone">
           <select>
-            <option>🇬🇧 +44</option>
-            <option>🇺🇸 +1</option>
-            <option>🇩🇪 +49</option>
+            <option>???? +44</option>
+            <option>???? +1</option>
+            <option>???? +49</option>
           </select>
           <input type="tel" id="popup-phone" placeholder="7700 900000">
         </div>
@@ -920,7 +914,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <div id="toast"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
+// -- DATA ----------------------------------------------------------------------
 const PRODUCTS = [
   {id:1, name:"Retatrutide", strength:"10mg", price:55.00, category:"GLP-1", desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
   {id:2, name:"Retatrutide", strength:"20mg", price:99.00, category:"GLP-1", desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
@@ -939,8 +933,8 @@ const PRODUCTS = [
   {id:15, name:"BPC-157", strength:"5mg",  price:15.00, category:"Repair", desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
   {id:16, name:"BPC-157", strength:"10mg", price:24.00, category:"Repair", desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
   {id:17, name:"Epithalon", strength:"10mg", price:19.00, category:"Longevity", desc:"Tetrapeptide studied for telomerase activation and potential anti-ageing mechanisms."},
-  {id:18, name:"TB-500", strength:"5mg",  price:24.00, category:"Repair", desc:"Thymosin β4-derived fragment; researched for tissue repair and cellular migration."},
-  {id:19, name:"TB-500", strength:"10mg", price:42.00, category:"Repair", desc:"Thymosin β4-derived fragment; researched for tissue repair and cellular migration."},
+  {id:18, name:"TB-500", strength:"5mg",  price:24.00, category:"Repair", desc:"Thymosin �4-derived fragment; researched for tissue repair and cellular migration."},
+  {id:19, name:"TB-500", strength:"10mg", price:42.00, category:"Repair", desc:"Thymosin �4-derived fragment; researched for tissue repair and cellular migration."},
 ];
 
 const CAT_COLORS = {
@@ -974,12 +968,12 @@ function cardImg(cat) {
   </div>`;
 }
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
+// -- STATE ---------------------------------------------------------------------
 let cart = JSON.parse(localStorage.getItem('clarix_cart') || '[]');
 let currentCat = '';
 let currentSearch = '';
 
-// ── RENDER PRODUCTS ───────────────────────────────────────────────────────────
+// -- RENDER PRODUCTS -----------------------------------------------------------
 function renderProducts() {
   const grid = document.getElementById('product-grid');
   const q = currentSearch.toLowerCase().trim();
@@ -1000,10 +994,10 @@ function renderProducts() {
       </div>
       <div class="pc-body">
         <div class="pc-name">${p.name}</div>
-        <div class="pc-strength">${p.strength} · Research Grade</div>
+        <div class="pc-strength">${p.strength} � Research Grade</div>
         <div class="pc-desc">${p.desc}</div>
         <div class="pc-foot">
-          <div class="pc-price">£${p.price.toFixed(2)}</div>
+          <div class="pc-price">�${p.price.toFixed(2)}</div>
           <button class="atc" onclick="addToCart(${p.id})">Add to Basket</button>
         </div>
       </div>
@@ -1038,7 +1032,7 @@ function filterCat(cat) {
   renderProducts();
 }
 
-// ── CART ──────────────────────────────────────────────────────────────────────
+// -- CART ----------------------------------------------------------------------
 function saveCart() { localStorage.setItem('clarix_cart', JSON.stringify(cart)); }
 
 function updateCartBadge() {
@@ -1080,7 +1074,7 @@ function renderCartDrawer() {
   const el = document.getElementById('cart-items-el');
   const foot = document.getElementById('cart-footer-el');
   if (!cart.length) {
-    el.innerHTML = `<div class="cart-empty"><div class="ce-icon">🧪</div><p style="font-weight:600;margin-bottom:4px">Your basket is empty</p><p style="font-size:.8rem">Add research compounds to get started</p></div>`;
+    el.innerHTML = `<div class="cart-empty"><div class="ce-icon">??</div><p style="font-weight:600;margin-bottom:4px">Your basket is empty</p><p style="font-size:.8rem">Add research compounds to get started</p></div>`;
     foot.innerHTML = '';
     return;
   }
@@ -1091,13 +1085,13 @@ function renderCartDrawer() {
         <div class="ci-name">${item.name}</div>
         <div class="ci-str">${item.strength}</div>
         <div class="ci-ctrl">
-          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">-</button>
           <span class="qty-n">${item.qty}</span>
           <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-        <div class="ci-price">£${(item.price * item.qty).toFixed(2)}</div>
+        <div class="ci-price">�${(item.price * item.qty).toFixed(2)}</div>
         <button class="ci-rm" onclick="removeFromCart(${item.id})" title="Remove">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
         </button>
@@ -1107,11 +1101,11 @@ function renderCartDrawer() {
   const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
   const shipping = subtotal >= 50 ? 0 : 3.99;
   foot.innerHTML = `
-    <div class="cd-sub"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
-    <div class="cd-sub"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--teal);font-weight:600">FREE</span>' : '£' + shipping.toFixed(2)}</span></div>
-    <div class="cd-tot"><span>Total</span><span>£${(subtotal + shipping).toFixed(2)}</span></div>
+    <div class="cd-sub"><span>Subtotal</span><span>�${subtotal.toFixed(2)}</span></div>
+    <div class="cd-sub"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--teal);font-weight:600">FREE</span>' : '�' + shipping.toFixed(2)}</span></div>
+    <div class="cd-tot"><span>Total</span><span>�${(subtotal + shipping).toFixed(2)}</span></div>
     <button class="checkout-btn" onclick="proceedCheckout()">Proceed to Checkout</button>
-    ${subtotal < 50 ? `<p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:10px">Spend £${(50-subtotal).toFixed(2)} more for free shipping</p>` : ''}
+    ${subtotal < 50 ? `<p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:10px">Spend �${(50-subtotal).toFixed(2)} more for free shipping</p>` : ''}
   `;
 }
 
@@ -1133,10 +1127,10 @@ function proceedCheckout() {
     showToast('Please sign in to continue to checkout');
     return;
   }
-  showToast('Redirecting to secure checkout…');
+  showToast('Redirecting to secure checkout�');
 }
 
-// ── ACCOUNT ───────────────────────────────────────────────────────────────────
+// -- ACCOUNT -------------------------------------------------------------------
 function getAccounts() { return JSON.parse(localStorage.getItem('clarix_accounts') || '[]'); }
 function saveAccounts(a) { localStorage.setItem('clarix_accounts', JSON.stringify(a)); }
 function getSession() { return JSON.parse(sessionStorage.getItem('clarix_session') || 'null'); }
@@ -1174,7 +1168,7 @@ function renderAcctModal(tab) {
     ${activeTab==='signin' ? `
       <form onsubmit="doSignIn(event)">
         <div class="fg"><label class="fl">Email</label><input class="fi" type="email" id="si-email" placeholder="you@example.com" required></div>
-        <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="si-pass" placeholder="••••••••" required></div>
+        <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="si-pass" placeholder="��������" required></div>
         <div id="si-msg"></div>
         <button type="submit" class="fb">Sign In</button>
         <p style="text-align:center;font-size:.8rem;margin-top:12px;color:var(--muted)"><a href="#" style="color:var(--teal);text-decoration:none">Forgot password?</a></p>
@@ -1234,7 +1228,7 @@ function signOut() {
   showToast('You have been signed out');
 }
 
-// ── SEARCH ────────────────────────────────────────────────────────────────────
+// -- SEARCH --------------------------------------------------------------------
 function openSearch() {
   document.getElementById('search-overlay').classList.add('open');
   setTimeout(() => document.getElementById('search-input').focus(), 100);
@@ -1261,7 +1255,7 @@ document.getElementById('search-input').addEventListener('input', function() {
         <div class="sr-name">${p.name} ${p.strength}</div>
         <div class="sr-cat">${p.category}</div>
       </div>
-      <div class="sr-price">£${p.price.toFixed(2)}</div>
+      <div class="sr-price">�${p.price.toFixed(2)}</div>
     </div>`).join('');
   res.classList.add('show');
 });
@@ -1287,20 +1281,20 @@ function doHeroSearch() {
 
 document.getElementById('hero-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') doHeroSearch(); });
 
-// ── POPUP ─────────────────────────────────────────────────────────────────────
+// -- POPUP ---------------------------------------------------------------------
 function closePopup() { document.getElementById('popup-overlay').classList.remove('open'); }
 function submitPopup(e) {
   e.preventDefault();
   sessionStorage.setItem('clarix_popup_done', '1');
   closePopup();
-  showToast('🎉 Your code <span class="t-teal">CLARIX15</span> has been emailed to you!');
+  showToast('?? Your code <span class="t-teal">CLARIX15</span> has been emailed to you!');
 }
 function submitNewsletter(e) {
   e.preventDefault();
-  showToast('🎉 Your code <span class="t-teal">CLARIX15</span> has been emailed to you!');
+  showToast('?? Your code <span class="t-teal">CLARIX15</span> has been emailed to you!');
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
+// -- TOAST ---------------------------------------------------------------------
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1310,16 +1304,16 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
 }
 
-// ── NAV SCROLL ────────────────────────────────────────────────────────────────
+// -- NAV SCROLL ----------------------------------------------------------------
 window.addEventListener('scroll', () => {
   document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
 });
 
-// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+// -- MOBILE MENU ---------------------------------------------------------------
 document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
 document.getElementById('mm-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
 
-// ── KEYBOARD / CLICK OUTSIDE ──────────────────────────────────────────────────
+// -- KEYBOARD / CLICK OUTSIDE --------------------------------------------------
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeSearch(); closeAcct(); closePopup(); }
 });
@@ -1327,21 +1321,21 @@ document.getElementById('acct-modal').addEventListener('click', e => { if (e.tar
 document.getElementById('search-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeSearch(); });
 document.getElementById('popup-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closePopup(); });
 
-// ── EVENT LISTENERS ───────────────────────────────────────────────────────────
+// -- EVENT LISTENERS -----------------------------------------------------------
 document.getElementById('search-btn').addEventListener('click', openSearch);
 document.getElementById('search-close').addEventListener('click', closeSearch);
 document.getElementById('acct-btn').addEventListener('click', openAcct);
 document.getElementById('cart-btn').addEventListener('click', openCart);
 
-// ── FEATURED CARD DOSAGE UPDATE ───────────────────────────────────────────────
+// -- FEATURED CARD DOSAGE UPDATE -----------------------------------------------
 function updateFeatCard(select, priceId, imgId, data) {
   const val = select.value;
   const [price, imgSrc] = data[val];
-  document.getElementById(priceId).textContent = '£' + price;
+  document.getElementById(priceId).textContent = '�' + price;
   document.getElementById(imgId).src = imgSrc;
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+// -- INIT ----------------------------------------------------------------------
 renderProducts();
 updateCartBadge();
 
