@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Clarix Peptides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F2240;--teal:#2BB5A5;--teal-dark:#229E8F;--gray-50:#F0F4FA;--gray-100:#E1E8F5;--muted:#6B7A99;--red:#e53e3e;--green:#1a9e6a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f5f7fb;color:var(--navy);overflow-x:hidden;min-height:100vh}
+h1,h2,h3{font-family:'Outfit',sans-serif}
+
+/* HEADER */
+.co-header{background:#fff;border-bottom:1px solid var(--gray-100);padding:0 24px}
+.co-header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px}
+.co-logo img{height:52px;width:auto}
+.co-secure{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--muted);font-weight:500}
+.co-secure svg{color:var(--teal)}
+.co-back-link{display:flex;align-items:center;gap:5px;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s}
+.co-back-link:hover{color:var(--navy)}
+
+/* BREADCRUMB STEPS */
+.co-steps{background:#fff;border-bottom:1px solid var(--gray-100);padding:12px 24px}
+.co-steps-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:6px;font-size:.78rem}
+.co-step{color:var(--muted);font-weight:500}
+.co-step.active{color:var(--navy);font-weight:700}
+.co-step.done{color:var(--teal);font-weight:600}
+.co-step-sep{color:var(--gray-100)}
+
+/* MAIN GRID */
+.co-main{max-width:1200px;margin:0 auto;padding:36px 24px 80px;display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:start}
+@media(max-width:900px){.co-main{grid-template-columns:1fr;gap:0;padding:0 0 80px}}
+
+/* FORM SIDE */
+.co-form-side{display:flex;flex-direction:column;gap:0}
+@media(max-width:900px){.co-form-side{order:2}}
+
+/* SECTION CARD */
+.co-section{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;border:1px solid var(--gray-100)}
+.co-section-hdr{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between}
+.co-section-hdr h2{font-size:1rem;font-weight:700;color:var(--navy)}
+.co-section-hdr a{font-size:.78rem;font-weight:600;color:var(--teal);text-decoration:none}
+.co-section-body{padding:16px 24px 24px;display:flex;flex-direction:column;gap:12px}
+
+/* FORM FIELDS */
+.field-group{display:flex;gap:12px}
+.field-group .field{flex:1}
+.field{position:relative}
+.field input,.field select{width:100%;padding:13px 14px;border:1.5px solid var(--gray-100);border-radius:10px;font-size:.875rem;font-family:'DM Sans',sans-serif;color:var(--navy);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%236B7A99' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.field input:focus,.field select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,181,165,.1)}
+.field input.error,.field select.error{border-color:var(--red)}
+.field-label{font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.field input::placeholder{color:rgba(107,122,153,.6)}
+
+/* CHECKBOX */
+.co-check{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;font-size:.83rem;color:var(--navy)}
+.co-check input[type=checkbox]{width:17px;height:17px;border:2px solid var(--gray-100);border-radius:4px;cursor:pointer;accent-color:var(--teal)}
+.co-check a{color:var(--teal);text-decoration:none}
+
+/* RADIO OPTIONS */
+.radio-option{border:1.5px solid var(--gray-100);border-radius:11px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:0}
+.radio-option.selected{border-color:var(--teal);background:rgba(43,181,165,.04)}
+.radio-option input[type=radio]{width:18px;height:18px;cursor:pointer;accent-color:var(--teal);flex-shrink:0;margin-top:1px}
+.radio-option-body{flex:1}
+.radio-option-title{font-size:.875rem;font-weight:600;color:var(--navy)}
+.radio-option-sub{font-size:.78rem;color:var(--muted);margin-top:2px;line-height:1.5}
+.radio-option-price{font-size:.875rem;font-weight:700;color:var(--navy);font-family:'Outfit',sans-serif;flex-shrink:0}
+.radio-option-free{font-size:.875rem;font-weight:700;color:var(--teal);font-family:'Outfit',sans-serif;flex-shrink:0}
+
+/* PAYMENT METHOD */
+.payment-option{border:1.5px solid var(--gray-100);border-radius:11px;overflow:hidden;margin-bottom:0}
+.payment-option.selected{border-color:var(--teal)}
+.payment-option-hdr{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;background:#fff;transition:background .15s}
+.payment-option-hdr:hover{background:var(--gray-50)}
+.payment-option.selected .payment-option-hdr{background:rgba(43,181,165,.04)}
+.payment-option-title{font-size:.875rem;font-weight:600;color:var(--navy);flex:1}
+.pay-icons{display:flex;gap:5px;align-items:center}
+.pay-icon{height:22px;padding:2px 6px;border:1px solid var(--gray-100);border-radius:5px;background:#fff;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif}
+.pay-icon.visa{color:#1a1f71}
+.pay-icon.mc{color:#eb001b}
+.pay-icon.amex{color:#2e77bc}
+.pay-icon.gpay{color:#5f6368}
+.payment-body{border-top:1px solid var(--gray-100);padding:16px;background:rgba(240,244,250,.4);display:none}
+.payment-option.selected .payment-body{display:block}
+
+/* CARD FIELDS */
+.card-field-group{display:flex;gap:10px;margin-top:10px}
+.card-field-group .field{flex:1}
+.card-number-wrap{position:relative}
+.card-number-wrap input{padding-right:56px}
+.card-type-badge{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.65rem;font-weight:700;color:var(--muted)}
+
+/* SUBMIT BTN */
+.co-submit{width:100%;padding:16px;background:var(--navy);color:#fff;border:none;border-radius:12px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.02em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 20px rgba(15,34,64,.22);margin-top:6px}
+.co-submit:hover{background:var(--teal);box-shadow:0 8px 28px rgba(43,181,165,.3);transform:translateY(-1px)}
+.co-submit:active{transform:scale(.99)}
+.co-submit:disabled{background:var(--muted);box-shadow:none;cursor:not-allowed;transform:none}
+
+/* SECURITY ROW */
+.co-security{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+.co-sec-item{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--muted)}
+.co-sec-item svg{color:var(--teal)}
+
+/* ── ORDER SUMMARY ── */
+.co-summary-side{position:sticky;top:24px}
+@media(max-width:900px){.co-summary-side{order:1;position:static;border-bottom:1px solid var(--gray-100);background:#fff;padding:20px;margin-bottom:0;border-radius:0}}
+.co-summary{background:#fff;border-radius:16px;border:1px solid var(--gray-100);overflow:hidden}
+@media(max-width:900px){.co-summary{border-radius:0;border:none}}
+.cs-hdr{padding:18px 22px;border-bottom:1px solid var(--gray-100);font-size:.85rem;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:space-between}
+.cs-toggle{background:none;border:none;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--teal);font-family:'DM Sans',sans-serif}
+.cs-items{padding:16px 22px;border-bottom:1px solid var(--gray-100);display:flex;flex-direction:column;gap:14px;max-height:320px;overflow-y:auto}
+.cs-item{display:flex;align-items:center;gap:12px}
+.cs-item-img{position:relative;flex-shrink:0}
+.cs-item-img img{width:56px;height:56px;object-fit:contain;border-radius:10px;border:1px solid var(--gray-100);background:var(--gray-50);padding:4px}
+.cs-qty-badge{position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:var(--navy);color:#fff;font-size:.65rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;border:2px solid #fff}
+.cs-item-info{flex:1;min-width:0}
+.cs-item-name{font-size:.85rem;font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-item-strength{font-size:.75rem;color:var(--muted);margin-top:1px}
+.cs-item-price{font-size:.9rem;font-weight:700;color:var(--navy);font-family:'Outfit',sans-serif;flex-shrink:0}
+.cs-discount{padding:14px 22px;border-bottom:1px solid var(--gray-100);display:flex;gap:8px}
+.cs-discount input{flex:1;padding:10px 13px;border:1.5px solid var(--gray-100);border-radius:9px;font-size:.85rem;font-family:'DM Sans',sans-serif;color:var(--navy);outline:none;transition:border-color .2s}
+.cs-discount input:focus{border-color:var(--teal)}
+.cs-discount button{padding:10px 16px;background:var(--gray-50);border:1.5px solid var(--gray-100);border-radius:9px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;color:var(--navy);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.cs-discount button:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+.cs-totals{padding:16px 22px}
+.cs-row{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:8px;color:var(--muted)}
+.cs-row span:last-child{font-weight:600;color:var(--navy)}
+.cs-row .free{color:var(--teal);font-weight:700}
+.cs-row .calculating{color:var(--muted);font-style:italic}
+.cs-divider{border:none;border-top:1px solid var(--gray-100);margin:12px 0}
+.cs-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px}
+.cs-total-label{font-size:.82rem;color:var(--muted);font-weight:500}
+.cs-total-label small{display:block;font-size:.72rem;margin-top:1px}
+.cs-total-amount{font-size:1.6rem;font-weight:800;color:var(--navy);font-family:'Outfit',sans-serif;letter-spacing:-.02em}
+.cs-currency{font-size:.78rem;font-weight:600;color:var(--muted);margin-right:4px}
+
+/* EMPTY STATE */
+.cs-empty{padding:32px 22px;text-align:center;color:var(--muted);font-size:.875rem}
+
+/* CONFIRMATION SCREEN */
+#confirmation{display:none;max-width:560px;margin:60px auto;text-align:center;padding:0 24px}
+.conf-icon{width:72px;height:72px;background:rgba(26,158,106,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;color:var(--green)}
+.conf-order-box{background:#fff;border-radius:16px;border:1px solid var(--gray-100);padding:24px;margin:28px 0;text-align:left}
+.conf-ref{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.conf-ref-num{font-size:1.1rem;font-weight:700;color:var(--navy);font-family:'Outfit',sans-serif}
+.conf-item-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray-50)}
+.conf-item-row:last-child{border-bottom:none}
+.conf-item-img{width:44px;height:44px;background:var(--gray-50);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.conf-item-img img{max-width:36px;max-height:36px;object-fit:contain}
+.conf-item-name{font-size:.85rem;font-weight:700;color:var(--navy)}
+.conf-item-str{font-size:.75rem;color:var(--muted)}
+.conf-item-price{font-size:.875rem;font-weight:700;color:var(--teal);font-family:'Outfit',sans-serif;margin-left:auto}
+.conf-continue{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;border-radius:11px;text-decoration:none;transition:background .2s}
+.conf-continue:hover{background:var(--teal)}
+
+/* TOAST */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:40px;font-size:.85rem;font-weight:500;z-index:500;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(15,34,64,.25);pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* NOTICE BAR */
+.co-notice{background:var(--navy);color:rgba(255,255,255,.75);text-align:center;padding:9px 24px;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase}
+
+/* SHIPPING PLACEHOLDER */
+.ship-placeholder{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:14px 16px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* BANK DETAILS */
+.bank-details{background:var(--gray-50);border-radius:10px;padding:16px;font-size:.82rem;line-height:1.8;color:var(--navy)}
+.bank-details strong{font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="co-notice">All products for research use only — not for human or veterinary use</div>
+
+<!-- HEADER -->
+<header class="co-header">
+  <div class="co-header-inner">
+    <a href="index.html"><div class="co-logo"><img src="brand_assets/clarix_logo_primary.png" alt="Clarix Peptides"></div></a>
+    <div class="co-secure">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure Checkout
+    </div>
+    <a href="javascript:history.back()" class="co-back-link">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back
+    </a>
+  </div>
+</header>
+
+<!-- STEPS -->
+<div class="co-steps">
+  <div class="co-steps-inner">
+    <span class="co-step done" id="step-cart">Cart</span>
+    <span class="co-step-sep">›</span>
+    <span class="co-step active" id="step-info">Information</span>
+    <span class="co-step-sep">›</span>
+    <span class="co-step" id="step-payment">Payment</span>
+    <span class="co-step-sep">›</span>
+    <span class="co-step" id="step-confirm">Confirmation</span>
+  </div>
+</div>
+
+<!-- MAIN CHECKOUT -->
+<div class="co-main" id="checkout-main">
+
+  <!-- FORM SIDE -->
+  <div class="co-form-side">
+
+    <!-- CONTACT -->
+    <div class="co-section">
+      <div class="co-section-hdr">
+        <h2>Contact</h2>
+        <a href="#">Sign in</a>
+      </div>
+      <div class="co-section-body">
+        <div class="field">
+          <div class="field-label">Email</div>
+          <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <label class="co-check">
+          <input type="checkbox" id="f-marketing" checked>
+          Email me with news and exclusive offers
+        </label>
+      </div>
+    </div>
+
+    <!-- DELIVERY -->
+    <div class="co-section">
+      <div class="co-section-hdr"><h2>Delivery</h2></div>
+      <div class="co-section-body">
+        <div class="field">
+          <div class="field-label">Country / Region</div>
+          <select id="f-country">
+            <option value="GB" selected>United Kingdom</option>
+            <option value="IE">Ireland</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="NL">Netherlands</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <div class="field-label">First name</div>
+            <input type="text" id="f-fname" placeholder="First name" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <div class="field-label">Last name</div>
+            <input type="text" id="f-lname" placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Address</div>
+          <input type="text" id="f-address" placeholder="Street address" autocomplete="street-address">
+        </div>
+        <div class="field">
+          <input type="text" id="f-address2" placeholder="Apartment, suite, etc. (optional)" autocomplete="address-line2">
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <div class="field-label">City</div>
+            <input type="text" id="f-city" placeholder="City" autocomplete="address-level2">
+          </div>
+          <div class="field">
+            <div class="field-label">Postcode</div>
+            <input type="text" id="f-postcode" placeholder="Postcode" autocomplete="postal-code" style="text-transform:uppercase">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
+          <input type="tel" id="f-phone" placeholder="+44 7700 000000" autocomplete="tel">
+        </div>
+        <label class="co-check">
+          <input type="checkbox" id="f-save">
+          Save this information for next time
+        </label>
+      </div>
+    </div>
+
+    <!-- SHIPPING METHOD -->
+    <div class="co-section">
+      <div class="co-section-hdr"><h2>Shipping method</h2></div>
+      <div class="co-section-body" id="shipping-options">
+        <div class="ship-placeholder" id="ship-placeholder">Enter your delivery address above to see available shipping methods.</div>
+        <div id="ship-methods" style="display:none;display:flex;flex-direction:column;gap:8px">
+          <label class="radio-option selected" id="ship-std" onclick="selectShipping(this,'std')">
+            <input type="radio" name="shipping" value="std" checked>
+            <div class="radio-option-body">
+              <div class="radio-option-title">Standard UK Delivery</div>
+              <div class="radio-option-sub">2–3 working days · Tracked &amp; signed</div>
+            </div>
+            <div class="radio-option-price" id="ship-std-price">£4.99</div>
+          </label>
+          <label class="radio-option" id="ship-next" onclick="selectShipping(this,'next')">
+            <input type="radio" name="shipping" value="next">
+            <div class="radio-option-body">
+              <div class="radio-option-title">Next Day UK Delivery</div>
+              <div class="radio-option-sub">Order before 3pm · DPD tracked</div>
+            </div>
+            <div class="radio-option-price">£7.99</div>
+          </label>
+          <label class="radio-option" id="ship-expr" onclick="selectShipping(this,'expr')">
+            <input type="radio" name="shipping" value="expr">
+            <div class="radio-option-body">
+              <div class="radio-option-title">Express Same-Day Dispatch</div>
+              <div class="radio-option-sub">Order before 3pm · Royal Mail Special</div>
+            </div>
+            <div class="radio-option-price">£12.99</div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="co-section">
+      <div class="co-section-hdr"><h2>Payment</h2></div>
+      <div class="co-section-body">
+        <p style="font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:4px">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          All transactions are secure and encrypted.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+
+          <!-- CARD -->
+          <div class="payment-option selected" id="pay-card" onclick="selectPayment('card')">
+            <div class="payment-option-hdr">
+              <input type="radio" name="payment" value="card" checked onclick="event.stopPropagation()">
+              <span class="payment-option-title">Credit / Debit Card</span>
+              <div class="pay-icons">
+                <span class="pay-icon visa">VISA</span>
+                <span class="pay-icon mc" style="font-size:.55rem">MC</span>
+                <span class="pay-icon amex">AMEX</span>
+              </div>
+            </div>
+            <div class="payment-body">
+              <div class="field card-number-wrap">
+                <div class="field-label">Card number</div>
+                <input type="text" id="f-card-num" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" oninput="formatCard(this)">
+                <span class="card-type-badge" id="card-type-badge"></span>
+              </div>
+              <div class="card-field-group">
+                <div class="field">
+                  <div class="field-label">Expiry date</div>
+                  <input type="text" id="f-expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+                </div>
+                <div class="field">
+                  <div class="field-label">Security code</div>
+                  <input type="text" id="f-cvv" placeholder="CVV" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')">
+                </div>
+              </div>
+              <div class="field" style="margin-top:10px">
+                <div class="field-label">Name on card</div>
+                <input type="text" id="f-cardname" placeholder="Full name as on card" autocomplete="cc-name">
+              </div>
+            </div>
+          </div>
+
+          <!-- BANK TRANSFER -->
+          <div class="payment-option" id="pay-bank" onclick="selectPayment('bank')">
+            <div class="payment-option-hdr">
+              <input type="radio" name="payment" value="bank" onclick="event.stopPropagation()">
+              <span class="payment-option-title">Bank Transfer</span>
+              <span style="font-size:.72rem;color:var(--muted);margin-left:auto">Manual payment</span>
+            </div>
+            <div class="payment-body">
+              <div class="bank-details">
+                <strong>Bank:</strong> Barclays UK<br>
+                <strong>Account name:</strong> Clarix Peptides Ltd<br>
+                <strong>Sort code:</strong> 20-00-00<br>
+                <strong>Account number:</strong> 12345678<br>
+                <br>
+                <span style="font-size:.78rem;color:var(--muted)">Please use your order number as the payment reference. Orders are dispatched upon receipt of cleared funds (usually 1 working day).</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BILLING ADDRESS -->
+    <div class="co-section">
+      <div class="co-section-hdr"><h2>Billing address</h2></div>
+      <div class="co-section-body" style="gap:8px">
+        <label class="radio-option selected" id="bill-same" onclick="selectBilling('same')">
+          <input type="radio" name="billing" value="same" checked>
+          <div class="radio-option-body">
+            <div class="radio-option-title">Same as shipping address</div>
+          </div>
+        </label>
+        <label class="radio-option" id="bill-diff" onclick="selectBilling('diff')">
+          <input type="radio" name="billing" value="diff">
+          <div class="radio-option-body">
+            <div class="radio-option-title">Use a different billing address</div>
+          </div>
+        </label>
+        <div id="billing-form" style="display:none;margin-top:4px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="field-group">
+              <div class="field"><input type="text" placeholder="First name" id="bf-fname"></div>
+              <div class="field"><input type="text" placeholder="Last name" id="bf-lname"></div>
+            </div>
+            <div class="field"><input type="text" placeholder="Address" id="bf-address"></div>
+            <div class="field-group">
+              <div class="field"><input type="text" placeholder="City" id="bf-city"></div>
+              <div class="field"><input type="text" placeholder="Postcode" id="bf-post"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <button class="co-submit" id="co-submit-btn" onclick="submitOrder()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Complete Order
+    </button>
+
+    <div class="co-security">
+      <div class="co-sec-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-bit SSL encryption
+      </div>
+      <div class="co-sec-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        PCI DSS compliant
+      </div>
+      <div class="co-sec-item">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+        Privacy protected
+      </div>
+    </div>
+
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.65">
+      By completing your order you confirm you are a licensed researcher aged 18+ and that all products are for in-vitro research use only. <a href="#" style="color:var(--teal)">Terms &amp; Conditions</a> apply.
+    </p>
+  </div>
+
+  <!-- ORDER SUMMARY -->
+  <div class="co-summary-side">
+    <div class="co-summary">
+      <div class="cs-hdr">
+        <span>Order Summary</span>
+        <span id="cs-item-count" style="color:var(--muted);font-weight:500;font-size:.8rem"></span>
+      </div>
+      <div class="cs-items" id="cs-items"></div>
+      <div class="cs-discount">
+        <input type="text" id="discount-input" placeholder="Discount code">
+        <button onclick="applyDiscount()">Apply</button>
+      </div>
+      <div class="cs-totals">
+        <div class="cs-row"><span>Subtotal</span><span id="cs-subtotal">£0.00</span></div>
+        <div class="cs-row"><span>Shipping</span><span id="cs-shipping" class="calculating">Enter address</span></div>
+        <div class="cs-row" id="cs-discount-row" style="display:none;color:var(--teal)"><span>Discount</span><span id="cs-discount-val" style="color:var(--teal)">−£0.00</span></div>
+        <hr class="cs-divider">
+        <div class="cs-total-row">
+          <div class="cs-total-label">Total <small><span class="cs-currency">GBP</span></small></div>
+          <div class="cs-total-amount" id="cs-total">£0.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /co-main -->
+
+<!-- CONFIRMATION SCREEN -->
+<div id="confirmation">
+  <div class="conf-icon">
+    <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  </div>
+  <h1 style="font-size:1.8rem;font-weight:800;color:var(--navy);letter-spacing:-.03em;margin-bottom:10px">Order Received</h1>
+  <p style="font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:4px">Thank you for your order. A confirmation has been sent to <strong id="conf-email" style="color:var(--navy)">your email</strong>.</p>
+  <p style="font-size:.82rem;color:var(--muted);line-height:1.7">Your order will be dispatched within 1 working day. You'll receive a tracking number by email.</p>
+  <div class="conf-order-box">
+    <div class="conf-ref">Order reference</div>
+    <div class="conf-ref-num" id="conf-order-num">#CX-000000</div>
+    <div style="margin-top:16px;border-top:1px solid var(--gray-100);padding-top:14px" id="conf-items"></div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-100);display:flex;justify-content:space-between;font-size:.875rem">
+      <span style="color:var(--muted)">Total paid</span>
+      <span style="font-weight:800;font-family:'Outfit',sans-serif;font-size:1rem" id="conf-total">£0.00</span>
+    </div>
+  </div>
+  <a href="shop.html" class="conf-continue">
+    Continue Shopping
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+
+<div id="toast"></div>
+
+<script src="products-data.js"></script>
+<script>
+// ── LOAD ITEMS ───────────────────────────────────────────────────────────────
+const isBuyNow = new URLSearchParams(window.location.search).has('buynow');
+let checkoutItems = [];
+
+if (isBuyNow) {
+  const bn = sessionStorage.getItem('clarix_checkout_items');
+  checkoutItems = bn ? JSON.parse(bn) : [];
+} else {
+  const saved = localStorage.getItem('clarix_cart');
+  checkoutItems = saved ? JSON.parse(saved) : [];
+}
+
+if (!checkoutItems.length) {
+  // redirect back if cart is empty
+  document.getElementById('cs-items').innerHTML = '<div class="cs-empty">Your basket is empty. <a href="shop.html" style="color:var(--teal)">Shop now →</a></div>';
+}
+
+// Render order summary items
+const itemsEl = document.getElementById('cs-items');
+let subtotal = 0;
+
+if (checkoutItems.length) {
+  itemsEl.innerHTML = checkoutItems.map(item => {
+    subtotal += item.price * item.qty;
+    return `
+    <div class="cs-item">
+      <div class="cs-item-img">
+        <img src="${item.img}" alt="${item.name}">
+        <div class="cs-qty-badge">${item.qty}</div>
+      </div>
+      <div class="cs-item-info">
+        <div class="cs-item-name">${item.name}</div>
+        <div class="cs-item-strength">${item.strength}</div>
+      </div>
+      <div class="cs-item-price">£${(item.price * item.qty).toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('cs-item-count').textContent = `${checkoutItems.reduce((s,i)=>s+i.qty,0)} item(s)`;
+document.getElementById('cs-subtotal').textContent = `£${subtotal.toFixed(2)}`;
+updateTotal();
+
+// ── SHIPPING ─────────────────────────────────────────────────────────────────
+let shippingCost = null;
+let selectedShipping = 'std';
+let discountAmount = 0;
+
+// Show shipping options when address is filled
+const addressFields = ['f-address', 'f-city', 'f-postcode'];
+addressFields.forEach(id => {
+  document.getElementById(id)?.addEventListener('input', checkShowShipping);
+});
+
+function checkShowShipping() {
+  const addr = document.getElementById('f-address').value.trim();
+  const city = document.getElementById('f-city').value.trim();
+  const post = document.getElementById('f-postcode').value.trim();
+  if (addr && city && post) {
+    document.getElementById('ship-placeholder').style.display = 'none';
+    document.getElementById('ship-methods').style.display = 'flex';
+    const stdPriceEl = document.getElementById('ship-std-price');
+    if (subtotal >= 100) {
+      stdPriceEl.innerHTML = '<span style="text-decoration:line-through;color:var(--muted);font-size:.78rem">£4.99</span> <span style="color:var(--teal)">FREE</span>';
+      shippingCost = 0;
+    } else {
+      stdPriceEl.textContent = '£4.99';
+      shippingCost = 4.99;
+    }
+    updateTotal();
+    document.getElementById('cs-shipping').textContent = shippingCost === 0 ? 'FREE' : `£${shippingCost.toFixed(2)}`;
+    if (shippingCost === 0) document.getElementById('cs-shipping').classList.add('free');
+  }
+}
+
+function selectShipping(el, type) {
+  document.querySelectorAll('.radio-option[id^="ship-"]').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedShipping = type;
+  const costs = {std: subtotal >= 100 ? 0 : 4.99, next: 7.99, expr: 12.99};
+  shippingCost = costs[type];
+  document.getElementById('cs-shipping').textContent = shippingCost === 0 ? 'FREE' : `£${shippingCost.toFixed(2)}`;
+  if (shippingCost === 0) document.getElementById('cs-shipping').classList.add('free');
+  else document.getElementById('cs-shipping').classList.remove('free');
+  updateTotal();
+}
+
+function updateTotal() {
+  const ship = shippingCost === null ? 0 : shippingCost;
+  const total = Math.max(0, subtotal + ship - discountAmount);
+  document.getElementById('cs-total').textContent = `£${total.toFixed(2)}`;
+}
+
+// ── DISCOUNT CODE ─────────────────────────────────────────────────────────────
+function applyDiscount() {
+  const code = document.getElementById('discount-input').value.trim().toUpperCase();
+  const codes = {CLARIX10: .10, RESEARCH15: .15, PEPTIDE20: .20};
+  if (codes[code]) {
+    discountAmount = subtotal * codes[code];
+    document.getElementById('cs-discount-row').style.display = 'flex';
+    document.getElementById('cs-discount-val').textContent = `−£${discountAmount.toFixed(2)}`;
+    document.getElementById('cs-subtotal').textContent = `£${(subtotal - discountAmount).toFixed(2)}`;
+    updateTotal();
+    showToast(`Discount code applied — ${(codes[code]*100).toFixed(0)}% off`);
+  } else {
+    showToast('Invalid discount code');
+  }
+}
+
+// ── PAYMENT METHODS ───────────────────────────────────────────────────────────
+function selectPayment(type) {
+  ['pay-card','pay-bank'].forEach(id => document.getElementById(id).classList.remove('selected'));
+  document.getElementById('pay-' + type).classList.add('selected');
+  document.querySelector(`input[value="${type}"]`).checked = true;
+}
+
+// ── BILLING ADDRESS ───────────────────────────────────────────────────────────
+function selectBilling(type) {
+  document.getElementById('bill-same').classList.toggle('selected', type==='same');
+  document.getElementById('bill-diff').classList.toggle('selected', type==='diff');
+  document.getElementById('bill-same').querySelector('input').checked = type==='same';
+  document.getElementById('bill-diff').querySelector('input').checked = type==='diff';
+  document.getElementById('billing-form').style.display = type==='diff' ? 'block' : 'none';
+}
+
+// ── CARD FORMATTING ───────────────────────────────────────────────────────────
+function formatCard(input) {
+  let val = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = val.replace(/(.{4})/g,'$1 ').trim();
+  const badge = document.getElementById('card-type-badge');
+  if (val.startsWith('4')) badge.textContent = 'VISA';
+  else if (/^5[1-5]/.test(val) || /^2[2-7]/.test(val)) badge.textContent = 'MC';
+  else if (/^3[47]/.test(val)) badge.textContent = 'AMEX';
+  else badge.textContent = '';
+}
+
+function formatExpiry(input) {
+  let val = input.value.replace(/\D/g,'');
+  if (val.length >= 2) val = val.substring(0,2) + ' / ' + val.substring(2,4);
+  input.value = val;
+}
+
+// ── FORM VALIDATION ───────────────────────────────────────────────────────────
+function validateForm() {
+  const required = [
+    {id:'f-email', label:'Email'},
+    {id:'f-fname', label:'First name'},
+    {id:'f-lname', label:'Last name'},
+    {id:'f-address', label:'Address'},
+    {id:'f-city', label:'City'},
+    {id:'f-postcode', label:'Postcode'},
+  ];
+  let valid = true;
+  required.forEach(({id, label}) => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.classList.add('error');
+      el.addEventListener('input', () => el.classList.remove('error'), {once:true});
+      valid = false;
+    }
+  });
+  const payType = document.querySelector('input[name="payment"]:checked')?.value;
+  if (payType === 'card') {
+    const cardFields = [
+      {id:'f-card-num', minLen:14},
+      {id:'f-expiry', minLen:7},
+      {id:'f-cvv', minLen:3},
+      {id:'f-cardname', minLen:2},
+    ];
+    cardFields.forEach(({id, minLen}) => {
+      const el = document.getElementById(id);
+      if (!el.value.replace(/\s/g,'').length >= minLen) {
+        el.classList.add('error');
+        el.addEventListener('input', () => el.classList.remove('error'), {once:true});
+        valid = false;
+      }
+    });
+  }
+  if (!valid) showToast('Please fill in all required fields');
+  return valid;
+}
+
+// ── SUBMIT ORDER ─────────────────────────────────────────────────────────────
+function submitOrder() {
+  if (!checkoutItems.length) { showToast('Your basket is empty'); return; }
+  if (!validateForm()) return;
+
+  const btn = document.getElementById('co-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Processing…`;
+  document.head.insertAdjacentHTML('beforeend','<style>@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>');
+
+  setTimeout(() => {
+    // Clear cart
+    if (!isBuyNow) localStorage.removeItem('clarix_cart');
+    sessionStorage.removeItem('clarix_checkout_items');
+
+    // Build confirmation
+    const orderNum = '#CX-' + Math.floor(100000 + Math.random() * 900000);
+    const email = document.getElementById('f-email').value;
+    const ship = shippingCost === null ? 4.99 : shippingCost;
+    const total = Math.max(0, subtotal + ship - discountAmount);
+
+    document.getElementById('conf-email').textContent = email || 'your email';
+    document.getElementById('conf-order-num').textContent = orderNum;
+    document.getElementById('conf-total').textContent = `£${total.toFixed(2)}`;
+    document.getElementById('conf-items').innerHTML = checkoutItems.map(item => `
+      <div class="conf-item-row">
+        <div class="conf-item-img"><img src="${item.img}" alt="${item.name}"></div>
+        <div style="flex:1"><div class="conf-item-name">${item.name}</div><div class="conf-item-str">${item.strength} × ${item.qty}</div></div>
+        <div class="conf-item-price">£${(item.price * item.qty).toFixed(2)}</div>
+      </div>`).join('');
+
+    // Show confirmation
+    document.getElementById('checkout-main').style.display = 'none';
+    document.getElementById('confirmation').style.display = 'block';
+    document.getElementById('step-payment').classList.add('active');
+    document.getElementById('step-confirm').classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }, 1800);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

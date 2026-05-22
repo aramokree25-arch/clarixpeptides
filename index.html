@@ -488,9 +488,10 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
   <div class="ss-inner">
     <p class="ss-label">Browse Our Catalogue</p>
     <h2 class="ss-title">Find Your Research Compound</h2>
-    <div class="ss-bar">
-      <input type="text" id="ss-input" placeholder="Search by compound name or strength…" autocomplete="off" oninput="filterProducts()">
+    <div class="ss-bar" style="position:relative">
+      <input type="text" id="ss-input" placeholder="Search by compound name or strength…" autocomplete="off" oninput="handleSsSearch(this.value)">
       <button onclick="filterProducts()">Search</button>
+      <div id="ss-dropdown" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:60px;background:#fff;border-radius:12px;border:1px solid var(--gray-100);box-shadow:0 8px 32px rgba(15,34,64,.12);overflow:hidden;max-height:360px;overflow-y:auto;z-index:50"></div>
     </div>
     <div class="ss-delivery">
       <span class="sd-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Next-day UK delivery on orders before 3pm, Mon–Sat</span>
@@ -520,7 +521,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-name">Retatrutide</div>
           <div class="feat-dose-row">
             <div class="feat-dose-label">Select Dosage</div>
-            <select class="feat-dose-select" onchange="updateFeatCard(this,'ret-price','ret-img',{10:['55.00','brand_assets/Retatrutide_10mg.png'],20:['99.00','brand_assets/Retatrutide_20mg.png']})">
+            <select id="feat-sel-ret" class="feat-dose-select" onchange="updateFeatCard(this,'ret-price','ret-img',{10:['55.00','brand_assets/Retatrutide_10mg.png'],20:['99.00','brand_assets/Retatrutide_20mg.png']})">
               <option value="10">10mg</option>
               <option value="20">20mg</option>
             </select>
@@ -528,7 +529,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-price-row">
             <div class="feat-price" id="ret-price">£55.00</div>
           </div>
-          <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="product.html?id=1" id="feat-link-ret" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -541,7 +542,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-name">GHK-Cu</div>
           <div class="feat-dose-row">
             <div class="feat-dose-label">Select Dosage</div>
-            <select class="feat-dose-select" onchange="updateFeatCard(this,'ghk-price','ghk-img',{50:['28.00','brand_assets/GHK-Cu_50mg.png'],100:['42.00','brand_assets/GHK-Cu_100mg.png']})">
+            <select id="feat-sel-ghk" class="feat-dose-select" onchange="updateFeatCard(this,'ghk-price','ghk-img',{50:['28.00','brand_assets/GHK-Cu_50mg.png'],100:['42.00','brand_assets/GHK-Cu_100mg.png']},'feat-link-ghk',{50:13,100:14})">
               <option value="50">50mg</option>
               <option value="100">100mg</option>
             </select>
@@ -549,7 +550,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-price-row">
             <div class="feat-price" id="ghk-price">£28.00</div>
           </div>
-          <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="product.html?id=13" id="feat-link-ghk" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -562,7 +563,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-name">BPC-157</div>
           <div class="feat-dose-row">
             <div class="feat-dose-label">Select Dosage</div>
-            <select class="feat-dose-select" onchange="updateFeatCard(this,'bpc-price','bpc-img',{5:['15.00','brand_assets/BPC-157_5mg.png'],10:['24.00','brand_assets/BPC-157_10mg.png']})">
+            <select id="feat-sel-bpc" class="feat-dose-select" onchange="updateFeatCard(this,'bpc-price','bpc-img',{5:['15.00','brand_assets/BPC-157_5mg.png'],10:['24.00','brand_assets/BPC-157_10mg.png']},'feat-link-bpc',{5:15,10:16})">
               <option value="5">5mg</option>
               <option value="10">10mg</option>
             </select>
@@ -570,7 +571,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-price-row">
             <div class="feat-price" id="bpc-price">£15.00</div>
           </div>
-          <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="product.html?id=15" id="feat-link-bpc" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -583,7 +584,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-name">TB-500</div>
           <div class="feat-dose-row">
             <div class="feat-dose-label">Select Dosage</div>
-            <select class="feat-dose-select" onchange="updateFeatCard(this,'tb-price','tb-img',{5:['24.00','brand_assets/TB-500_5mg.png'],10:['42.00','brand_assets/TB-500_10mg.png']})">
+            <select id="feat-sel-tb" class="feat-dose-select" onchange="updateFeatCard(this,'tb-price','tb-img',{5:['24.00','brand_assets/TB-500_5mg.png'],10:['42.00','brand_assets/TB-500_10mg.png']},'feat-link-tb',{5:18,10:19})">
               <option value="5">5mg</option>
               <option value="10">10mg</option>
             </select>
@@ -591,7 +592,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
           <div class="feat-price-row">
             <div class="feat-price" id="tb-price">£24.00</div>
           </div>
-          <a href="#" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="product.html?id=18" id="feat-link-tb" class="feat-shop-btn">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -801,30 +802,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <!-- TOAST -->
 <div id="toast"></div>
 
+<script src="products-data.js"></script>
 <script>
-// -- DATA ----------------------------------------------------------------------
-const PRODUCTS = [
-  {id:1, name:"Retatrutide", strength:"10mg", price:55.00, category:"GLP-1", desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
-  {id:2, name:"Retatrutide", strength:"20mg", price:99.00, category:"GLP-1", desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
-  {id:3, name:"Tirzepatide", strength:"10mg", price:42.00, category:"GLP-1", desc:"Dual GIP and GLP-1 receptor agonist; powerful metabolic research compound."},
-  {id:4, name:"Tirzepatide", strength:"20mg", price:85.00, category:"GLP-1", desc:"Dual GIP and GLP-1 receptor agonist; powerful metabolic research compound."},
-  {id:5, name:"Semaglutide", strength:"5mg",  price:35.00, category:"GLP-1", desc:"GLP-1 receptor agonist widely studied for metabolic and appetite research."},
-  {id:6, name:"Semaglutide", strength:"10mg", price:52.00, category:"GLP-1", desc:"GLP-1 receptor agonist widely studied for metabolic and appetite research."},
-  {id:7, name:"Tesamorelin", strength:"2mg",  price:36.00, category:"Growth Hormone", desc:"Synthetic GHRH analogue; studied for adipose tissue and GH secretion research."},
-  {id:8, name:"Tesamorelin", strength:"5mg",  price:52.00, category:"Growth Hormone", desc:"Synthetic GHRH analogue; studied for adipose tissue and GH secretion research."},
-  {id:9, name:"CJC-1295 (no DAC)", strength:"2mg", price:22.00, category:"Growth Hormone", desc:"GHRH analogue with short half-life; used in pulsatile GH secretion studies."},
-  {id:10, name:"CJC-1295 (no DAC)", strength:"5mg", price:36.00, category:"Growth Hormone", desc:"GHRH analogue with short half-life; used in pulsatile GH secretion studies."},
-  {id:11, name:"Ipamorelin", strength:"2mg",  price:14.00, category:"Growth Hormone", desc:"Selective GH secretagogue with high specificity; minimal off-target effects."},
-  {id:12, name:"Ipamorelin", strength:"5mg",  price:22.00, category:"Growth Hormone", desc:"Selective GH secretagogue with high specificity; minimal off-target effects."},
-  {id:13, name:"GHK-Cu", strength:"50mg",  price:28.00, category:"Repair", desc:"Copper-binding tripeptide researched for tissue remodelling and cellular signalling."},
-  {id:14, name:"GHK-Cu", strength:"100mg", price:42.00, category:"Repair", desc:"Copper-binding tripeptide researched for tissue remodelling and cellular signalling."},
-  {id:15, name:"BPC-157", strength:"5mg",  price:15.00, category:"Repair", desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
-  {id:16, name:"BPC-157", strength:"10mg", price:24.00, category:"Repair", desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
-  {id:17, name:"Epithalon", strength:"10mg", price:19.00, category:"Longevity", desc:"Tetrapeptide studied for telomerase activation and potential anti-ageing mechanisms."},
-  {id:18, name:"TB-500", strength:"5mg",  price:24.00, category:"Repair", desc:"Thymosin ß4-derived fragment; researched for tissue repair and cellular migration."},
-  {id:19, name:"TB-500", strength:"10mg", price:42.00, category:"Repair", desc:"Thymosin ß4-derived fragment; researched for tissue repair and cellular migration."},
-];
-
 function cardImg() {
   const c = {bg:"#0F2240", accent:"#2BB5A5"};
   return `<div style="width:100%;height:100%;background:linear-gradient(135deg,${c.bg} 0%,${c.bg}CC 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
@@ -866,9 +845,9 @@ function renderProducts() {
     return;
   }
   grid.innerHTML = filtered.map(p => `
-    <div class="product-card">
-      <div class="pc-img">
-        ${cardImg()}
+    <div class="product-card" onclick="window.location.href='product.html?id=${p.id}'" style="cursor:pointer">
+      <div class="pc-img" style="background:#f0f4fa;display:flex;align-items:center;justify-content:center;padding:20px">
+        <img src="${p.img}" alt="${p.name}" style="max-height:120px;max-width:100%;object-fit:contain">
       </div>
       <div class="pc-body">
         <div class="pc-name">${p.name}</div>
@@ -876,18 +855,41 @@ function renderProducts() {
         <div class="pc-desc">${p.desc}</div>
         <div class="pc-foot">
           <div class="pc-price">£${p.price.toFixed(2)}</div>
-          <button class="atc" onclick="addToCart(${p.id})">Add to Basket</button>
+          <button class="atc" onclick="event.stopPropagation();window.location.href='product.html?id=${p.id}'">View Product</button>
         </div>
       </div>
     </div>
   `).join('');
 }
 
+function handleSsSearch(val) {
+  currentSearch = val;
+  renderProducts();
+  const dd = document.getElementById('ss-dropdown');
+  const q = val.toLowerCase().trim();
+  if (!q) { dd.style.display = 'none'; return; }
+  const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q)).slice(0, 8);
+  if (!matches.length) { dd.style.display = 'none'; return; }
+  dd.style.display = 'block';
+  dd.innerHTML = matches.map(p => `
+    <div onclick="window.location.href='product.html?id=${p.id}'" style="padding:10px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid #f0f4fa;transition:background .15s" onmouseover="this.style.background='#f0f4fa'" onmouseout="this.style.background='#fff'">
+      <img src="${p.img}" alt="${p.name}" style="width:40px;height:40px;object-fit:contain;background:#f0f4fa;border-radius:8px;padding:4px;flex-shrink:0">
+      <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.875rem;color:#0F2240">${p.name} ${p.strength}</div></div>
+      <div style="font-weight:700;font-size:.875rem;color:#2BB5A5;font-family:Outfit,sans-serif;flex-shrink:0">£${p.price.toFixed(2)}</div>
+    </div>`).join('');
+}
+
 function filterProducts() {
   currentSearch = document.getElementById('ss-input').value;
   renderProducts();
+  document.getElementById('ss-dropdown').style.display = 'none';
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
+
+document.addEventListener('click', e => {
+  const dd = document.getElementById('ss-dropdown');
+  if (dd && !dd.contains(e.target) && e.target.id !== 'ss-input') dd.style.display = 'none';
+});
 
 
 // -- CART ----------------------------------------------------------------------
@@ -1108,10 +1110,9 @@ document.getElementById('search-input').addEventListener('input', function() {
     return;
   }
   res.innerHTML = matches.slice(0,8).map(p => `
-    <div class="sr-item" onclick="pickSearchResult(${p.id})">
-      <div>
-        <div class="sr-name">${p.name} ${p.strength}</div>
-      </div>
+    <div class="sr-item" onclick="window.location.href='product.html?id=${p.id}'">
+      <img class="sr-img" src="${p.img}" alt="${p.name}" style="width:40px;height:40px;object-fit:contain;flex-shrink:0;background:var(--gray-50);border-radius:8px;padding:4px">
+      <div><div class="sr-name">${p.name} ${p.strength}</div></div>
       <div class="sr-price">£${p.price.toFixed(2)}</div>
     </div>`).join('');
   res.classList.add('show');
@@ -1183,11 +1184,12 @@ document.getElementById('acct-btn').addEventListener('click', openAcct);
 document.getElementById('cart-btn').addEventListener('click', openCart);
 
 // -- FEATURED CARD DOSAGE UPDATE -----------------------------------------------
-function updateFeatCard(select, priceId, imgId, data) {
+function updateFeatCard(select, priceId, imgId, data, linkId, idMap) {
   const val = select.value;
   const [price, imgSrc] = data[val];
   document.getElementById(priceId).textContent = '£' + price;
   document.getElementById(imgId).src = imgSrc;
+  if (linkId && idMap) document.getElementById(linkId).href = 'product.html?id=' + idMap[val];
 }
 
 // -- INIT ----------------------------------------------------------------------

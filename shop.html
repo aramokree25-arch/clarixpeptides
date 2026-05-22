@@ -683,44 +683,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <!-- TOAST -->
 <div id="toast"></div>
 
+<script src="products-data.js"></script>
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const PRODUCTS = [
-  {id:1,  name:"Retatrutide",       strength:"10mg",  price:55.00, category:"GLP-1",          img:"brand_assets/Retatrutide_10mg.png",      desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
-  {id:2,  name:"Retatrutide",       strength:"20mg",  price:99.00, category:"GLP-1",          img:"brand_assets/Retatrutide_20mg.png",      desc:"Tri-receptor GIP/GLP-1/glucagon agonist for advanced metabolic research."},
-  {id:3,  name:"Tirzepatide",       strength:"10mg",  price:42.00, category:"GLP-1",          img:"brand_assets/Tirzepatide_10mg.png",      desc:"Dual GIP and GLP-1 receptor agonist; powerful metabolic research compound."},
-  {id:4,  name:"Tirzepatide",       strength:"20mg",  price:85.00, category:"GLP-1",          img:"brand_assets/Tirzepatide_20mg.png",      desc:"Dual GIP and GLP-1 receptor agonist; powerful metabolic research compound."},
-  {id:5,  name:"Semaglutide",       strength:"5mg",   price:35.00, category:"GLP-1",          img:"brand_assets/Semaglutide_5mg.png",       desc:"GLP-1 receptor agonist widely studied for metabolic and appetite research."},
-  {id:6,  name:"Semaglutide",       strength:"10mg",  price:52.00, category:"GLP-1",          img:"brand_assets/Semaglutide_10mg.png",      desc:"GLP-1 receptor agonist widely studied for metabolic and appetite research."},
-  {id:7,  name:"Tesamorelin",       strength:"2mg",   price:36.00, category:"Growth Hormone", img:"brand_assets/Tesamorelin_2mg.png",       desc:"Synthetic GHRH analogue; studied for adipose tissue and GH secretion research."},
-  {id:8,  name:"Tesamorelin",       strength:"5mg",   price:52.00, category:"Growth Hormone", img:"brand_assets/Tesamorelin_5mg.png",       desc:"Synthetic GHRH analogue; studied for adipose tissue and GH secretion research."},
-  {id:9,  name:"CJC-1295 (no DAC)",strength:"2mg",   price:22.00, category:"Growth Hormone", img:"brand_assets/CJC-1295_no_DAC_2mg.png",  desc:"GHRH analogue with short half-life; used in pulsatile GH secretion studies."},
-  {id:10, name:"CJC-1295 (no DAC)",strength:"5mg",   price:36.00, category:"Growth Hormone", img:"brand_assets/CJC-1295_no_DAC_5mg.png",  desc:"GHRH analogue with short half-life; used in pulsatile GH secretion studies."},
-  {id:11, name:"Ipamorelin",        strength:"2mg",   price:14.00, category:"Growth Hormone", img:"brand_assets/Ipamorelin_2mg.png",        desc:"Selective GH secretagogue with high specificity; minimal off-target effects."},
-  {id:12, name:"Ipamorelin",        strength:"5mg",   price:22.00, category:"Growth Hormone", img:"brand_assets/Ipamorelin_5mg.png",        desc:"Selective GH secretagogue with high specificity; minimal off-target effects."},
-  {id:13, name:"GHK-Cu",           strength:"50mg",  price:28.00, category:"Repair",         img:"brand_assets/GHK-Cu_50mg.png",           desc:"Copper-binding tripeptide researched for tissue remodelling and cellular signalling."},
-  {id:14, name:"GHK-Cu",           strength:"100mg", price:42.00, category:"Repair",         img:"brand_assets/GHK-Cu_100mg.png",          desc:"Copper-binding tripeptide researched for tissue remodelling and cellular signalling."},
-  {id:15, name:"BPC-157",          strength:"5mg",   price:15.00, category:"Repair",         img:"brand_assets/BPC-157_5mg.png",           desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
-  {id:16, name:"BPC-157",          strength:"10mg",  price:24.00, category:"Repair",         img:"brand_assets/BPC-157_10mg.png",          desc:"Body protection compound; extensively studied for tissue healing and cytoprotection."},
-  {id:17, name:"Epithalon",        strength:"10mg",  price:19.00, category:"Longevity",      img:"brand_assets/Epithalon_10mg.png",        desc:"Tetrapeptide studied for telomerase activation and potential anti-ageing mechanisms."},
-  {id:18, name:"TB-500",           strength:"5mg",   price:24.00, category:"Repair",         img:"brand_assets/TB-500_5mg.png",            desc:"Thymosin β4-derived fragment; researched for tissue repair and cellular migration."},
-  {id:19, name:"TB-500",           strength:"10mg",  price:42.00, category:"Repair",         img:"brand_assets/TB-500_10mg.png",           desc:"Thymosin β4-derived fragment; researched for tissue repair and cellular migration."},
-];
-
-// Grouped compounds for card rendering
-const COMPOUNDS = [
-  {slug:"retatrutide",  name:"Retatrutide",       category:"GLP-1",          badge:"Bestseller", variants:[{id:1,strength:"10mg",price:55,img:"brand_assets/Retatrutide_10mg.png"},{id:2,strength:"20mg",price:99,img:"brand_assets/Retatrutide_20mg.png"}]},
-  {slug:"tirzepatide",  name:"Tirzepatide",       category:"GLP-1",          badge:null,         variants:[{id:3,strength:"10mg",price:42,img:"brand_assets/Tirzepatide_10mg.png"},{id:4,strength:"20mg",price:85,img:"brand_assets/Tirzepatide_20mg.png"}]},
-  {slug:"semaglutide",  name:"Semaglutide",       category:"GLP-1",          badge:null,         variants:[{id:5,strength:"5mg",price:35,img:"brand_assets/Semaglutide_5mg.png"},{id:6,strength:"10mg",price:52,img:"brand_assets/Semaglutide_10mg.png"}]},
-  {slug:"tesamorelin",  name:"Tesamorelin",       category:"Growth Hormone", badge:null,         variants:[{id:7,strength:"2mg",price:36,img:"brand_assets/Tesamorelin_2mg.png"},{id:8,strength:"5mg",price:52,img:"brand_assets/Tesamorelin_5mg.png"}]},
-  {slug:"cjc-1295",     name:"CJC-1295 (no DAC)", category:"Growth Hormone", badge:null,         variants:[{id:9,strength:"2mg",price:22,img:"brand_assets/CJC-1295_no_DAC_2mg.png"},{id:10,strength:"5mg",price:36,img:"brand_assets/CJC-1295_no_DAC_5mg.png"}]},
-  {slug:"ipamorelin",   name:"Ipamorelin",        category:"Growth Hormone", badge:null,         variants:[{id:11,strength:"2mg",price:14,img:"brand_assets/Ipamorelin_2mg.png"},{id:12,strength:"5mg",price:22,img:"brand_assets/Ipamorelin_5mg.png"}]},
-  {slug:"ghk-cu",       name:"GHK-Cu",            category:"Repair",         badge:null,         variants:[{id:13,strength:"50mg",price:28,img:"brand_assets/GHK-Cu_50mg.png"},{id:14,strength:"100mg",price:42,img:"brand_assets/GHK-Cu_100mg.png"}]},
-  {slug:"bpc-157",      name:"BPC-157",           category:"Repair",         badge:null,         variants:[{id:15,strength:"5mg",price:15,img:"brand_assets/BPC-157_5mg.png"},{id:16,strength:"10mg",price:24,img:"brand_assets/BPC-157_10mg.png"}]},
-  {slug:"epithalon",    name:"Epithalon",         category:"Longevity",      badge:"New",        variants:[{id:17,strength:"10mg",price:19,img:"brand_assets/Epithalon_10mg.png"}]},
-  {slug:"tb-500",       name:"TB-500",            category:"Repair",         badge:null,         variants:[{id:18,strength:"5mg",price:24,img:"brand_assets/TB-500_5mg.png"},{id:19,strength:"10mg",price:42,img:"brand_assets/TB-500_10mg.png"}]},
-];
-
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem('clarix_cart') || '[]');
 let shopSearch = '';
@@ -774,8 +738,8 @@ function renderShopGrid() {
           ${options}
         </select>
         <div class="sc-price" id="price-${c.slug}">£${defaultV.price.toFixed(2)}</div>
-        <button class="sc-btn" onclick="addToCartFromCard('${c.slug}')">
-          Shop Now
+        <button class="sc-btn" onclick="goToProduct('${c.slug}')">
+          View Product
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
         <div class="sc-purity">&gt;99% Purity · <span>COA Included</span></div>
@@ -813,6 +777,12 @@ function addToCartFromCard(slug) {
   const id = parseInt(sel.value);
   addToCart(id);
   openCart();
+}
+
+function goToProduct(slug) {
+  const sel = document.getElementById('sel-' + slug);
+  const id = sel ? parseInt(sel.value) : (COMPOUNDS.find(c => c.slug === slug)?.variants[0]?.id);
+  if (id) window.location.href = 'product.html?id=' + id;
 }
 
 function onShopSearch(val) {
@@ -1018,7 +988,8 @@ document.getElementById('search-input').addEventListener('input', function() {
     res.classList.add('show'); return;
   }
   res.innerHTML = matches.slice(0,8).map(p => `
-    <div class="sr-item" onclick="pickSearchResult('${p.name}')">
+    <div class="sr-item" onclick="window.location.href='product.html?id=${p.id}'">
+      <img class="sr-img" src="${p.img}" alt="${p.name}" style="width:40px;height:40px;object-fit:contain;flex-shrink:0;background:var(--gray-50);border-radius:8px;padding:4px">
       <div><div class="sr-name">${p.name} ${p.strength}</div></div>
       <div class="sr-price">£${p.price.toFixed(2)}</div>
     </div>`).join('');
