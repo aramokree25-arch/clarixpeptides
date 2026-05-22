@@ -88,10 +88,10 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .ss-inner{max-width:900px;margin:0 auto;text-align:center}
 .ss-label{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
 .ss-title{font-size:1.875rem;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-bottom:20px}
-.ss-bar{display:flex;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(15,34,64,.1);border:1.5px solid var(--gray-100);background:#fff}
-.ss-bar input{flex:1;padding:16px 22px;font-size:1rem;font-family:'DM Sans',sans-serif;border:none;outline:none;color:var(--navy)}
+.ss-bar{display:flex;border-radius:14px;box-shadow:0 4px 24px rgba(15,34,64,.1);border:1.5px solid var(--gray-100);background:#fff;position:relative}
+.ss-bar input{flex:1;padding:16px 22px;font-size:1rem;font-family:'DM Sans',sans-serif;border:none;outline:none;color:var(--navy);border-radius:13px 0 0 13px;background:#fff}
 .ss-bar select{padding:0 16px;font-family:'DM Sans',sans-serif;font-size:.875rem;border:none;border-left:1px solid var(--gray-100);background:#fff;color:var(--navy);outline:none;cursor:pointer}
-.ss-bar button{padding:16px 28px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.ss-bar button{padding:16px 28px;background:var(--navy);color:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;border-radius:0 13px 13px 0;flex-shrink:0}
 .ss-bar button:hover{background:var(--teal)}
 .ss-cats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
 .ss-cat{padding:7px 18px;border-radius:20px;border:1.5px solid var(--gray-100);background:#fff;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
@@ -835,6 +835,7 @@ let currentSearch = '';
 // -- RENDER PRODUCTS -----------------------------------------------------------
 function renderProducts() {
   const grid = document.getElementById('product-grid');
+  if (!grid) return;
   const q = currentSearch.toLowerCase().trim();
   const filtered = PRODUCTS.filter(p => {
     const matchQ = !q || p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q);
@@ -869,14 +870,29 @@ function handleSsSearch(val) {
   const q = val.toLowerCase().trim();
   if (!q) { dd.style.display = 'none'; return; }
   const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q)).slice(0, 8);
-  if (!matches.length) { dd.style.display = 'none'; return; }
+  if (!matches.length) {
+    dd.style.display = 'block';
+    dd.innerHTML = `<div style="padding:20px 16px;text-align:center;color:#6B7A99;font-size:.85rem">No compounds found for "<strong style="color:#0F2240">${q}</strong>"</div>`;
+    return;
+  }
   dd.style.display = 'block';
   dd.innerHTML = matches.map(p => `
-    <div onclick="window.location.href='product.html?id=${p.id}'" style="padding:10px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid #f0f4fa;transition:background .15s" onmouseover="this.style.background='#f0f4fa'" onmouseout="this.style.background='#fff'">
-      <img src="${p.img}" alt="${p.name}" style="width:40px;height:40px;object-fit:contain;background:#f0f4fa;border-radius:8px;padding:4px;flex-shrink:0">
-      <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.875rem;color:#0F2240">${p.name} ${p.strength}</div></div>
-      <div style="font-weight:700;font-size:.875rem;color:#2BB5A5;font-family:Outfit,sans-serif;flex-shrink:0">£${p.price.toFixed(2)}</div>
-    </div>`).join('');
+    <div onclick="window.location.href='product.html?id=${p.id}'"
+      style="padding:11px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;border-bottom:1px solid #f0f4fa;transition:background .12s"
+      onmouseover="this.style.background='#f7f9fc'" onmouseout="this.style.background='#fff'">
+      <div style="width:46px;height:46px;background:linear-gradient(135deg,#f4f8ff,#edf5f3);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #e1e8f5">
+        <img src="${p.img}" alt="${p.name}" style="max-width:36px;max-height:36px;object-fit:contain">
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:.875rem;color:#0F2240;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+        <div style="font-size:.75rem;color:#6B7A99;margin-top:1px">${p.strength} · Research Grade</div>
+      </div>
+      <div style="font-weight:800;font-size:.9rem;color:#2BB5A5;font-family:Outfit,sans-serif;flex-shrink:0">£${p.price.toFixed(2)}</div>
+    </div>`).join('') +
+    `<div onclick="filterProducts()" style="padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;background:#f7f9fc;font-size:.78rem;font-weight:600;color:#6B7A99;transition:background .12s" onmouseover="this.style.background='#edf5f3';this.style.color='#2BB5A5'" onmouseout="this.style.background='#f7f9fc';this.style.color='#6B7A99'">
+      See all results for "${q}"
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </div>`;
 }
 
 function filterProducts() {
