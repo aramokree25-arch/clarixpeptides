@@ -212,13 +212,13 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .values-header{text-align:center;margin-bottom:52px}
 .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 @media(max-width:800px){.values-grid{grid-template-columns:1fr}}
-.val-card{background:var(--navy);border-radius:20px;padding:36px 30px;position:relative;overflow:hidden;transition:transform .25s}
+.val-card{background:#1a3458;border-radius:20px;padding:36px 30px;position:relative;overflow:hidden;transition:transform .25s;border:1px solid rgba(43,181,165,.15)}
 .val-card:hover{transform:translateY(-4px)}
-.val-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(43,181,165,.07);pointer-events:none}
-.val-icon{width:52px;height:52px;border-radius:14px;background:rgba(43,181,165,.15);display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:22px}
+.val-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(43,181,165,.1);pointer-events:none}
+.val-icon{width:52px;height:52px;border-radius:14px;background:rgba(43,181,165,.2);display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:22px}
 .val-card h3{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:10px}
-.val-card p{font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.75}
-.val-num{position:absolute;bottom:20px;right:24px;font-family:'Outfit',sans-serif;font-size:5rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1;user-select:none}
+.val-card p{font-size:.875rem;color:rgba(255,255,255,.82);line-height:1.75}
+.val-num{position:absolute;bottom:20px;right:24px;font-family:'Outfit',sans-serif;font-size:5rem;font-weight:900;color:rgba(255,255,255,.06);line-height:1;user-select:none}
 
 /* ── QUALITY ── */
 .quality-section{padding:88px 24px;background:#fff}
@@ -355,65 +355,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     HERO
-════════════════════════════════════════ -->
-<section class="au-hero">
-  <div class="au-hero-inner">
-    <div class="au-hero-text">
-      <div class="au-breadcrumb">
-        <a href="index.html">Home</a>
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        <span>About Us</span>
-      </div>
-      <div class="au-tag fiu">Who We Are</div>
-      <h1 class="fiu d1">Precision. Purity.<br><em>Purpose.</em></h1>
-      <p class="fiu d2">Clarix Peptides is the UK's dedicated supplier of independently verified research peptides — built from the ground up for the scientific community.</p>
-      <a href="shop.html" class="au-hero-cta fiu d3">
-        Browse Compounds
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-    <div class="au-hero-img fiu d2">
-      <div class="au-hero-photo">
-        <img src="brand_assets/about-us-img1.webp" alt="Clarix Peptides research laboratory">
-      </div>
-      <div class="au-hero-badge">
-        <div class="au-hero-badge-icon">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div>
-          <strong>&gt;99%</strong>
-          <span>Purity guaranteed</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     STATS BAR
-════════════════════════════════════════ -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-num" data-target="4800" data-suffix="+">0+</div>
-      <div class="stat-label">Orders dispatched</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">&gt;99%</div>
-      <div class="stat-label">Guaranteed purity</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num" data-target="19" data-suffix="">0</div>
-      <div class="stat-label">Research compounds</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">COA with every order</div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════════
      OUR STORY
@@ -463,7 +404,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         </div>
         <h3>Integrity</h3>
         <p>Full transparency at every step. Every batch is independently verified and documented. We share the data — purity figures, test methods, and COA — before you even place an order.</p>
-        <span class="val-num">01</span>
       </div>
 
       <div class="val-card reveal" style="transition-delay:.10s">
@@ -472,7 +412,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         </div>
         <h3>Precision</h3>
         <p>Research demands accuracy. We hold every compound to the highest analytical standards — because your research depends on it.</p>
-        <span class="val-num">02</span>
       </div>
 
       <div class="val-card reveal" style="transition-delay:.16s">
@@ -481,7 +420,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         </div>
         <h3>Reliability</h3>
         <p>When your research timeline matters, supply chain cannot be a variable. Orders placed before 2pm ship the same day. Consistent stock, consistent quality, consistent service.</p>
-        <span class="val-num">03</span>
       </div>
 
     </div>
@@ -496,15 +434,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <div class="reveal-left" style="position:relative">
       <div class="quality-photo">
         <img src="brand_assets/about-us-img2.webp" alt="Laboratory quality verification">
-        <div class="quality-badge">
-          <div class="quality-badge-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-          </div>
-          <div>
-            <p>Every batch independently analysed</p>
-            <span>HPLC + Mass Spectrometry verification</span>
-          </div>
-        </div>
       </div>
     </div>
     <div class="reveal-right">
@@ -539,15 +468,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
             <span>Full COA with every order. View detailed test results, batch numbers, and storage specifications.</span>
           </div>
         </div>
-        <div class="ql-item">
-          <div class="ql-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div>
-            <strong>GMP-Compliant Manufacturing</strong>
-            <span>Compounds are produced under Good Manufacturing Practice conditions with full batch traceability.</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -559,9 +479,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 <section class="certs-section">
   <div class="certs-inner">
     <div class="reveal">
-      <div class="sec-label">Our Credentials</div>
+      <div class="sec-label">Credentials</div>
       <h2 class="sec-title" style="color:var(--navy)">Certified to the highest standards</h2>
-      <p style="font-size:.9rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.75">Our quality credentials are not self-declared — they are independently issued and maintained to give you full confidence in every compound you order.</p>
     </div>
     <div class="certs-grid">
       <div class="cert-card reveal" style="transition-delay:.05s">
@@ -572,12 +491,12 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       <div class="cert-card reveal" style="transition-delay:.15s">
         <img class="cert-img" src="brand_assets/GMP-certif.png" alt="GMP Certified">
         <strong>GMP Certified</strong>
-        <p>Manufactured under Good Manufacturing Practice conditions for consistent quality and traceability.</p>
+        <p>We manufacture under certified Good Manufacturing Practice conditions, ensuring batch-to-batch consistency and full traceability.</p>
       </div>
       <div class="cert-card reveal" style="transition-delay:.25s">
         <img class="cert-img" src="brand_assets/ISO-9001.webp" alt="ISO 9001" style="width:80px;height:80px;object-fit:contain">
         <strong>ISO 9001</strong>
-        <p>Quality management systems certified to ISO 9001 standards, ensuring process consistency at every stage.</p>
+        <p>Our operations are built on a certified Quality Management System, ensuring repeatable processes and a commitment to ongoing improvement at every stage.</p>
       </div>
     </div>
   </div>
@@ -602,16 +521,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         <div>
           <h3>UK-Based Operations</h3>
           <p>Fully UK-based storage, dispatch, and customer support. No international shipping delays. Orders typically arrive within 1–2 working days across mainland UK.</p>
-        </div>
-      </div>
-
-      <div class="why-card reveal" style="transition-delay:.12s">
-        <div class="why-icon">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        </div>
-        <div>
-          <h3>24hr Same-Day Dispatch</h3>
-          <p>Orders placed before 2pm ship the same working day. We understand research doesn't wait — your compounds shouldn't either.</p>
         </div>
       </div>
 
