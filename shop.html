@@ -442,13 +442,6 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
         </select>
       </div>
     </div>
-    <div class="sf-pills">
-      <button class="sf-pill active" onclick="setShopCat('',this)">All Products</button>
-      <button class="sf-pill" onclick="setShopCat('GLP-1',this)">GLP-1 Agonists</button>
-      <button class="sf-pill" onclick="setShopCat('Growth Hormone',this)">Growth Hormone</button>
-      <button class="sf-pill" onclick="setShopCat('Repair',this)">Repair Peptides</button>
-      <button class="sf-pill" onclick="setShopCat('Longevity',this)">Longevity</button>
-    </div>
   </div>
 </div>
 
@@ -617,11 +610,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       </div>
       <div class="fc">
         <h4>Shop</h4>
-        <a href="#">GLP-1 Agonists</a>
-        <a href="#">Growth Hormone</a>
-        <a href="#">Repair Peptides</a>
-        <a href="#">Longevity</a>
-        <a href="#">All Products</a>
+        <a href="shop.html">All Products</a>
       </div>
       <div class="fc">
         <h4>Company</h4>
@@ -739,17 +728,15 @@ const COMPOUNDS = [
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem('clarix_cart') || '[]');
-let shopCat = '';
 let shopSearch = '';
 let shopSort = 'featured';
 
 // ── SHOP GRID ─────────────────────────────────────────────────────────────────
 function getFilteredCompounds() {
   let list = COMPOUNDS.slice();
-  if (shopCat) list = list.filter(c => c.category === shopCat);
   if (shopSearch) {
     const q = shopSearch.toLowerCase();
-    list = list.filter(c => c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+    list = list.filter(c => c.name.toLowerCase().includes(q));
   }
   if (shopSort === 'price-asc')  list.sort((a,b) => a.variants[0].price - b.variants[0].price);
   if (shopSort === 'price-desc') list.sort((a,b) => b.variants[0].price - a.variants[0].price);
@@ -764,8 +751,7 @@ function renderShopGrid() {
   // Update count text
   const countEl = document.getElementById('sf-count-text');
   if (countEl) {
-    const catLabel = shopCat ? ` in ${shopCat}` : '';
-    countEl.textContent = `Showing ${list.length} compound${list.length!==1?'s':''} ${catLabel}· Research grade · UK dispatched`;
+    countEl.textContent = `Showing ${list.length} compound${list.length!==1?'s':''} · Research grade · UK dispatched`;
   }
 
   if (!list.length) {
@@ -780,17 +766,9 @@ function renderShopGrid() {
     const defaultV = c.variants[0];
     const options = c.variants.map(v => `<option value="${v.id}" data-price="${v.price}" data-img="${v.img}">${v.strength}</option>`).join('');
     const badgeHtml = c.badge ? `<span class="sc-badge">${c.badge}</span>` : '';
-    const catColors = {
-      'GLP-1': '#2BB5A5',
-      'Growth Hormone': '#3DCFBF',
-      'Repair': '#2BB5A5',
-      'Longevity': '#50D8C8'
-    };
-    const catColor = catColors[c.category] || '#2BB5A5';
     return `
     <div class="shop-card" style="animation-delay:${i*0.07}s">
       ${badgeHtml}
-      <span class="sc-cat-tag">${c.category}</span>
       <div class="sc-img-area">
         <img src="${defaultV.img}" alt="${c.name}" id="img-${c.slug}" loading="lazy">
       </div>
@@ -840,13 +818,6 @@ function addToCartFromCard(slug) {
   const id = parseInt(sel.value);
   addToCart(id);
   openCart();
-}
-
-function setShopCat(cat, btn) {
-  shopCat = cat;
-  document.querySelectorAll('.sf-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderShopGrid();
 }
 
 function onShopSearch(val) {
@@ -1046,14 +1017,14 @@ document.getElementById('search-input').addEventListener('input', function() {
   const q = this.value.toLowerCase().trim();
   const res = document.getElementById('search-results');
   if (!q) { res.classList.remove('show'); return; }
-  const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q));
+  const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q));
   if (!matches.length) {
     res.innerHTML = '<div class="sr-item"><div><div class="sr-name">No results found</div></div></div>';
     res.classList.add('show'); return;
   }
   res.innerHTML = matches.slice(0,8).map(p => `
     <div class="sr-item" onclick="pickSearchResult('${p.name}')">
-      <div><div class="sr-name">${p.name} ${p.strength}</div><div class="sr-cat">${p.category}</div></div>
+      <div><div class="sr-name">${p.name} ${p.strength}</div></div>
       <div class="sr-price">£${p.price.toFixed(2)}</div>
     </div>`).join('');
   res.classList.add('show');

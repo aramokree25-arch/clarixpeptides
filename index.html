@@ -489,18 +489,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
     <p class="ss-label">Browse Our Catalogue</p>
     <h2 class="ss-title">Find Your Research Compound</h2>
     <div class="ss-bar">
-      <input type="text" id="ss-input" placeholder="Search by compound name, strength or category…" autocomplete="off" oninput="filterProducts()">
-      <select id="ss-cat-select" onchange="filterProducts()">
-        <option value="">All Categories</option>
-        <option value="GLP-1">GLP-1</option>
-        <option value="Growth Hormone">Growth Hormone</option>
-      </select>
+      <input type="text" id="ss-input" placeholder="Search by compound name or strength…" autocomplete="off" oninput="filterProducts()">
       <button onclick="filterProducts()">Search</button>
-    </div>
-    <div class="ss-cats">
-      <button class="ss-cat active" onclick="setCat('',this)">All Products</button>
-      <button class="ss-cat" onclick="setCat('GLP-1',this)">GLP-1 Agonists</button>
-      <button class="ss-cat" onclick="setCat('Growth Hormone',this)">Growth Hormone Peptides</button>
     </div>
     <div class="ss-delivery">
       <span class="sd-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Next-day UK delivery on orders before 3pm, Mon–Sat</span>
@@ -825,11 +815,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       </div>
       <div class="fc">
         <h4>Shop</h4>
-        <a href="#">GLP-1 Agonists</a>
-        <a href="#">Growth Hormone</a>
-        <a href="#">Repair Peptides</a>
-        <a href="#">Longevity</a>
-        <a href="#">All Products</a>
+        <a href="shop.html">All Products</a>
       </div>
       <div class="fc">
         <h4>Company</h4>
@@ -937,15 +923,8 @@ const PRODUCTS = [
   {id:19, name:"TB-500", strength:"10mg", price:42.00, category:"Repair", desc:"Thymosin ß4-derived fragment; researched for tissue repair and cellular migration."},
 ];
 
-const CAT_COLORS = {
-  "GLP-1":          {bg:"#0F2240", accent:"#2BB5A5"},
-  "Growth Hormone":  {bg:"#1A3560", accent:"#3DCFBF"},
-  "Repair":          {bg:"#0A2030", accent:"#2BB5A5"},
-  "Longevity":       {bg:"#162040", accent:"#50D8C8"},
-};
-
-function cardImg(cat) {
-  const c = CAT_COLORS[cat] || {bg:"#0F2240", accent:"#2BB5A5"};
+function cardImg() {
+  const c = {bg:"#0F2240", accent:"#2BB5A5"};
   return `<div style="width:100%;height:100%;background:linear-gradient(135deg,${c.bg} 0%,${c.bg}CC 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity=".25" style="position:absolute;right:-10px;bottom:-10px">
       <circle cx="40" cy="40" r="36" stroke="${c.accent}" stroke-width="2"/>
@@ -970,7 +949,6 @@ function cardImg(cat) {
 
 // -- STATE ---------------------------------------------------------------------
 let cart = JSON.parse(localStorage.getItem('clarix_cart') || '[]');
-let currentCat = '';
 let currentSearch = '';
 
 // -- RENDER PRODUCTS -----------------------------------------------------------
@@ -978,19 +956,17 @@ function renderProducts() {
   const grid = document.getElementById('product-grid');
   const q = currentSearch.toLowerCase().trim();
   const filtered = PRODUCTS.filter(p => {
-    const matchCat = !currentCat || p.category === currentCat;
-    const matchQ = !q || p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
-    return matchCat && matchQ;
+    const matchQ = !q || p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q);
+    return matchQ;
   });
   if (!filtered.length) {
-    grid.innerHTML = '<div class="no-products">No products found. Try a different search or category.</div>';
+    grid.innerHTML = '<div class="no-products">No products found. Try a different search.</div>';
     return;
   }
   grid.innerHTML = filtered.map(p => `
     <div class="product-card">
       <div class="pc-img">
-        ${cardImg(p.category)}
-        <span class="pc-cat-tag">${p.category}</span>
+        ${cardImg()}
       </div>
       <div class="pc-body">
         <div class="pc-name">${p.name}</div>
@@ -1007,30 +983,10 @@ function renderProducts() {
 
 function filterProducts() {
   currentSearch = document.getElementById('ss-input').value;
-  const sel = document.getElementById('ss-cat-select').value;
-  if (sel) currentCat = sel;
   renderProducts();
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
 
-function setCat(cat, btn) {
-  currentCat = cat;
-  currentSearch = '';
-  document.getElementById('ss-input').value = '';
-  document.getElementById('ss-cat-select').value = cat;
-  document.querySelectorAll('.ss-cat').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProducts();
-}
-
-function filterCat(cat) {
-  currentCat = cat;
-  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
-  document.querySelectorAll('.ss-cat').forEach(b => {
-    b.classList.toggle('active', b.textContent.includes(cat));
-  });
-  renderProducts();
-}
 
 // -- CART ----------------------------------------------------------------------
 function saveCart() { localStorage.setItem('clarix_cart', JSON.stringify(cart)); }
@@ -1243,7 +1199,7 @@ document.getElementById('search-input').addEventListener('input', function() {
   const q = this.value.toLowerCase().trim();
   const res = document.getElementById('search-results');
   if (!q) { res.classList.remove('show'); return; }
-  const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q));
+  const matches = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.strength.toLowerCase().includes(q));
   if (!matches.length) {
     res.innerHTML = '<div class="sr-item"><div><div class="sr-name">No results found</div></div></div>';
     res.classList.add('show');
@@ -1253,7 +1209,6 @@ document.getElementById('search-input').addEventListener('input', function() {
     <div class="sr-item" onclick="pickSearchResult(${p.id})">
       <div>
         <div class="sr-name">${p.name} ${p.strength}</div>
-        <div class="sr-cat">${p.category}</div>
       </div>
       <div class="sr-price">£${p.price.toFixed(2)}</div>
     </div>`).join('');
@@ -1262,7 +1217,6 @@ document.getElementById('search-input').addEventListener('input', function() {
 
 function pickSearchResult(id) {
   closeSearch();
-  currentCat = '';
   currentSearch = PRODUCTS.find(p => p.id === id)?.name || '';
   document.getElementById('ss-input').value = currentSearch;
   renderProducts();
@@ -1273,7 +1227,6 @@ function doHeroSearch() {
   const q = document.getElementById('hero-search-input').value.trim();
   if (!q) return;
   currentSearch = q;
-  currentCat = '';
   document.getElementById('ss-input').value = q;
   renderProducts();
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
